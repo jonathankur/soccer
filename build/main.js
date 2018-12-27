@@ -50,7 +50,7 @@ module.exports = webpackAsyncContext;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(39);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__events_events__ = __webpack_require__(99);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_connect__ = __webpack_require__(269);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_connect__ = __webpack_require__(196);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -83,7 +83,7 @@ var HomePage = /** @class */ (function () {
     };
     HomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-home',template:/*ion-inline-start:"/var/www/html/ionic/soccer/src/pages/home/home.html"*/'<ion-header no-border no-shadow>\n	<ion-navbar align-title="center" class="backgroundTransparent">\n		<button ion-button menuToggle color="dark"><ion-icon name="menu"></ion-icon></button>\n		<ion-title><img src="./assets/img/mainbanner.jpg"></ion-title>\n	</ion-navbar>\n</ion-header>\n<ion-menu id="mainmenu" [content]="myMenum" style="overflow:hidden" [persistent]=true >\n	<ion-content class="menucontainer">\n		<ion-item-group class="paddingMenu">\n			<button ion-item (click)="doScan()" class="list-item menuitems" menuClose>\n			   Social Feed\n			</button>\n			<button ion-item (click)="doMap()" class="list-item menuitems" menuClose>\n			   Membership\n			</button>\n			<button ion-item (click)="showAccount()" class="list-item menuitems" menuClose>\n			   Shop\n			</button>\n			<button ion-item (click)="orderHistory()" class="list-item menuitems" menuClose>\n			   Player Profiles\n			</button>\n			<button ion-item (click)="tandc()" class="list-item menuitems" menuClose>\n			   Fixtures & Ladders\n			</button>\n			<button ion-item (click)="concern()" class="list-item menuitems" menuClose>\n			   Calendar of Events\n			</button>\n			<button ion-item (click)="concern()" class="list-item menuitems" menuClose>\n			   Marketplace\n			</button>\n	\n			<button ion-item (click)="signOutAlert()" class="list-item menuitems" menuClose>\n			   Sign Out\n			</button>\n			\n		</ion-item-group>\n	</ion-content>\n</ion-menu>\n\n<ion-content #myMenum text-center>\n		<ion-list no-lines text-wrap >\n			<ion-item *ngFor="let f of feed"  class="borderBottomGainsboroAlpha">\n<img [src]="f.img" style="width:100%">\n<p style="font-weight:bold">{{ f.title }}</p>\n<p>{{ f.txt }}</p>\n</ion-item>\n</ion-list>\n</ion-content>\n\n<ion-footer>\n<img [src]="banner" style="width:100%">\n<ion-tabs>\n <ion-tab [root]="calRoot" tabTitle="Events" tabIcon="calendar"></ion-tab>\n <ion-tab [root]="calRoot" tabTitle="Fixtures" tabIcon="clipboard"></ion-tab>\n <ion-tab [root]="calRoot" tabTitle="Profiles" tabIcon="contact"></ion-tab>\n <ion-tab [root]="calRoot" tabTitle="Market" tabIcon="basket"></ion-tab>\n</ion-tabs>\n</ion-footer>\n'/*ion-inline-end:"/var/www/html/ionic/soccer/src/pages/home/home.html"*/
+            selector: 'page-home',template:/*ion-inline-start:"/var/www/html/ionic/soccer/src/pages/home/home.html"*/'<ion-header no-border no-shadow  style="background-color:white">\n	<ion-navbar align-title="center"  style="background-color:white">\n		<button ion-button menuToggle color="dark"><ion-icon name="menu"></ion-icon></button>\n		<ion-title style="background-color:white"><img src="./assets/img/mainbanner.jpg"></ion-title>\n	</ion-navbar>\n</ion-header>\n<ion-menu id="mainmenu" [content]="myMenum" style="overflow:hidden" [persistent]=true >\n	<ion-content class="menucontainer">\n		<ion-item-group class="paddingMenu">\n			<button ion-item (click)="doScan()" class="list-item menuitems" menuClose>\n			   Social Feed\n			</button>\n			<button ion-item (click)="doMap()" class="list-item menuitems" menuClose>\n			   Membership\n			</button>\n			<button ion-item (click)="showAccount()" class="list-item menuitems" menuClose>\n			   Shop\n			</button>\n			<button ion-item (click)="orderHistory()" class="list-item menuitems" menuClose>\n			   Player Profiles\n			</button>\n			<button ion-item (click)="tandc()" class="list-item menuitems" menuClose>\n			   Fixtures & Ladders\n			</button>\n			<button ion-item (click)="concern()" class="list-item menuitems" menuClose>\n			   Calendar of Events\n			</button>\n			<button ion-item (click)="concern()" class="list-item menuitems" menuClose>\n			   Marketplace\n			</button>\n	\n			<button ion-item (click)="signOutAlert()" class="list-item menuitems" menuClose>\n			   Sign Out\n			</button>\n			\n		</ion-item-group>\n	</ion-content>\n</ion-menu>\n\n<ion-content #myMenum text-center>\n		<ion-list no-lines text-wrap >\n			<ion-item *ngFor="let f of feed"  class="borderBottomGainsboroAlpha">\n<img [src]="f.img" style="width:100%">\n<p style="font-weight:bold; margin-bottom:10px">{{ f.title }}</p>\n<p [innerHTML]="f.txt"> </p>\n</ion-item>\n</ion-list>\n<ion-item style="height:200px; min-height:200px"> &nbsp;\n</ion-item>\n</ion-content>\n\n<ion-footer>\n<img [src]="banner" style="width:100%">\n<ion-toolbar>\n<ion-buttons>\n <button ion-button icon-start>\n  Events &nbsp; \n <ion-icon name="calendar"> </ion-icon>\n </button>\n\n <button ion-button icon-start>\n  Fixtures &nbsp; \n <ion-icon name="clipboard"> </ion-icon>\n </button>\n\n <button ion-button icon-start>\n  Profiles &nbsp; \n <ion-icon name="contact"> </ion-icon>\n </button>\n\n <button ion-button icon-start>\n  Market &nbsp; \n <ion-icon name="basket"> </ion-icon>\n </button>\n</ion-buttons>\n</ion-toolbar>\n</ion-footer>\n'/*ion-inline-end:"/var/www/html/ionic/soccer/src/pages/home/home.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_3__providers_connect__["a" /* Connect */]])
     ], HomePage);
@@ -98,9 +98,63 @@ var HomePage = /** @class */ (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Connect; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_http__ = __webpack_require__(197);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(271);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_core__ = __webpack_require__(0);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var Connect = /** @class */ (function () {
+    function Connect(http) {
+        this.http = http;
+        //   private server_url: string = 'http://theparcelpeople.com.au/catalogue/server/';
+        this.server_url = 'http://pikcup.com.au/test/';
+        this.server2 = 'http://theparcelpeople.com.au/catalogue/server/';
+    }
+    Connect.prototype.PostQuery = function (object, parameter) {
+        return this.http.get(this.server_url + object + parameter).map(function (res) { return res.json(); });
+    };
+    Connect.prototype.getList = function (object) {
+        return this.http.get(this.server_url + object).map(function (res) { return res.json(); });
+    };
+    Connect.prototype.getList2 = function (object) {
+        return this.http.get(this.server2 + object).map(function (res) { return res.json(); });
+    };
+    Connect.prototype.logError = function (err) {
+        console.error('Error: ' + err);
+    };
+    Connect.prototype.getServerUrl = function () {
+        return this.server_url;
+    };
+    Connect = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_2__angular_core__["A" /* Injectable */])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0__angular_http__["a" /* Http */]])
+    ], Connect);
+    return Connect;
+}());
+
+//# sourceMappingURL=connect.js.map
+
+/***/ }),
+
+/***/ 198:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(197);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(219);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(199);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(221);
 
 
 Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_1__app_module__["a" /* AppModule */]);
@@ -108,7 +162,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 
 /***/ }),
 
-/***/ 219:
+/***/ 221:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -118,11 +172,11 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(39);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(191);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_status_bar__ = __webpack_require__(194);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__(268);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__(270);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_home_home__ = __webpack_require__(195);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_events_events__ = __webpack_require__(99);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__providers_connect__ = __webpack_require__(269);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__angular_http__ = __webpack_require__(270);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__providers_connect__ = __webpack_require__(196);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__angular_http__ = __webpack_require__(197);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -179,7 +233,7 @@ var AppModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 268:
+/***/ 270:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -222,61 +276,6 @@ var MyApp = /** @class */ (function () {
 }());
 
 //# sourceMappingURL=app.component.js.map
-
-/***/ }),
-
-/***/ 269:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Connect; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_http__ = __webpack_require__(270);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(271);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_core__ = __webpack_require__(0);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-var Connect = /** @class */ (function () {
-    function Connect(http) {
-        this.http = http;
-        //   private server_url: string = 'http://theparcelpeople.com.au/catalogue/server/';
-        this.server_url = 'http://pikcup.com.au/test/';
-        this.server2 = 'http://theparcelpeople.com.au/catalogue/server/';
-    }
-    Connect.prototype.PostQuery = function (object, parameter) {
-        return this.http.get(this.server_url + object + parameter).map(function (res) { return res.json(); });
-    };
-    Connect.prototype.getList = function (object) {
-        return this.http.get(this.server_url + object).map(function (res) { return res.json(); });
-    };
-    Connect.prototype.getList2 = function (object) {
-        return this.http.get(this.server2 + object).map(function (res) { return res.json(); });
-    };
-    Connect.prototype.logError = function (err) {
-        console.error('Error: ' + err);
-    };
-    Connect.prototype.getServerUrl = function () {
-        return this.server_url;
-    };
-    Connect = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_2__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_http__["a" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_http__["a" /* Http */]) === "function" && _a || Object])
-    ], Connect);
-    return Connect;
-    var _a;
-}());
-
-//# sourceMappingURL=connect.js.map
 
 /***/ }),
 
@@ -325,5 +324,5 @@ var EventsPage = /** @class */ (function () {
 
 /***/ })
 
-},[196]);
+},[198]);
 //# sourceMappingURL=main.js.map
