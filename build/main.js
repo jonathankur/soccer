@@ -249,7 +249,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var Connect = /** @class */ (function () {
     function Connect(http) {
         this.http = http;
-        this.server_url = 'http://theparcelpeople.com.au/catalogue/server/';
+        //   private server_url: string = 'http://theparcelpeople.com.au/catalogue/server/';
+        this.server_url = 'http://pikcup.com.au/test/';
         this.server2 = 'http://theparcelpeople.com.au/catalogue/server/';
     }
     Connect.prototype.PostQuery = function (object, parameter) {
@@ -269,9 +270,10 @@ var Connect = /** @class */ (function () {
     };
     Connect = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_2__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0__angular_http__["a" /* Http */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_http__["a" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_http__["a" /* Http */]) === "function" && _a || Object])
     ], Connect);
     return Connect;
+    var _a;
 }());
 
 //# sourceMappingURL=connect.js.map
