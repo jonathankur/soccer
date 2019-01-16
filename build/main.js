@@ -950,7 +950,6 @@ var SocialuploadPage = /** @class */ (function () {
         this.pictaken = false;
     };
     SocialuploadPage.prototype.getpicture = function () {
-        alert('starting');
         var options = {
             quality: 70,
             targetWidth: 600,
