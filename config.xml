@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="au.com.soccer" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="macsoccer" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Soccer Club</name>
     <description>Maccabi Soccer Club</description>
     <author email="jon@goodsgalaxy.com.au" href="http://theparcelpeople.com.au">Jonathan Kur</author>
@@ -84,6 +84,9 @@
     <plugin name="cordova-plugin-ionic-webview" spec="^2.0.0" />
     <plugin name="cordova-plugin-ionic-keyboard" spec="^2.0.5" />
     <plugin name="cordova-plugin-advanced-http" source="npm" />
+
+    <plugin name="cordova-plugin-stripe" spec="^1.5.3" />
+
    <plugin name="cordova-plugin-camera" source="npm">
         <variable name="CAMERA_USAGE_DESCRIPTION" value="Use Camera to Upload Pictures" />
         <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value="Use Camera to Upload Pictures" />
