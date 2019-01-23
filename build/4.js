@@ -1,14 +1,14 @@
 webpackJsonp([4],{
 
-/***/ 293:
+/***/ 298:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MarketitemPageModule", function() { return MarketitemPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TeamplayersPageModule", function() { return TeamplayersPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__marketitem__ = __webpack_require__(215);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__teamplayers__ = __webpack_require__(105);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,23 +18,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var MarketitemPageModule = /** @class */ (function () {
-    function MarketitemPageModule() {
+var TeamplayersPageModule = /** @class */ (function () {
+    function TeamplayersPageModule() {
     }
-    MarketitemPageModule = __decorate([
+    TeamplayersPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__marketitem__["a" /* MarketitemPage */],
+                __WEBPACK_IMPORTED_MODULE_2__teamplayers__["a" /* TeamplayersPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__marketitem__["a" /* MarketitemPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__teamplayers__["a" /* TeamplayersPage */]),
             ],
         })
-    ], MarketitemPageModule);
-    return MarketitemPageModule;
+    ], TeamplayersPageModule);
+    return TeamplayersPageModule;
 }());
 
-//# sourceMappingURL=marketitem.module.js.map
+//# sourceMappingURL=teamplayers.module.js.map
 
 /***/ })
 
