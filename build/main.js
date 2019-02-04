@@ -280,11 +280,11 @@ var Connect = /** @class */ (function () {
 
 var map = {
 	"../pages/enter-credit-card/enter-credit-card.module": [
-		291,
+		292,
 		7
 	],
 	"../pages/events/events.module": [
-		292,
+		291,
 		6
 	],
 	"../pages/marketitem/marketitem.module": [
@@ -296,15 +296,15 @@ var map = {
 		3
 	],
 	"../pages/teamfixtures/teamfixtures.module": [
-		295,
+		297,
 		2
 	],
 	"../pages/teamladder/teamladder.module": [
-		296,
+		295,
 		1
 	],
 	"../pages/teamnews/teamnews.module": [
-		297,
+		296,
 		0
 	],
 	"../pages/teamplayers/teamplayers.module": [
@@ -1725,13 +1725,13 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_28__angular_http__["b" /* HttpModule */],
                 __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["d" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* MyApp */], {}, {
                     links: [
-                        { loadChildren: '../pages/enter-credit-card/enter-credit-card.module#EnterCreditCardPageModule', name: 'EnterCreditCardPage', segment: 'enter-credit-card', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/events/events.module#EventsPageModule', name: 'EventsPage', segment: 'events', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/enter-credit-card/enter-credit-card.module#EnterCreditCardPageModule', name: 'EnterCreditCardPage', segment: 'enter-credit-card', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/marketitem/marketitem.module#MarketitemPageModule', name: 'MarketitemPage', segment: 'marketitem', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/sell/sell.module#SellPageModule', name: 'SellPage', segment: 'sell', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/teamfixtures/teamfixtures.module#TeamfixturesPageModule', name: 'TeamfixturesPage', segment: 'teamfixtures', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/teamladder/teamladder.module#TeamladderPageModule', name: 'TeamladderPage', segment: 'teamladder', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/teamnews/teamnews.module#TeamnewsPageModule', name: 'TeamnewsPage', segment: 'teamnews', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/teamfixtures/teamfixtures.module#TeamfixturesPageModule', name: 'TeamfixturesPage', segment: 'teamfixtures', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/teamplayers/teamplayers.module#TeamplayersPageModule', name: 'TeamplayersPage', segment: 'teamplayers', priority: 'low', defaultHistory: [] }
                     ]
                 })
