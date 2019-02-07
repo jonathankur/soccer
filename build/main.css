@@ -26375,3 +26375,11 @@ video#bgvid {
   background: url(../assets/img/YogaSky.jpg) no-repeat;
   background-size: cover;
 }
+
+page-history .odd {
+  background-color: #FFFFFF;
+}
+
+page-history .even {
+  background-color: #F7F7FF;
+}

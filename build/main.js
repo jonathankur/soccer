@@ -1,187 +1,12 @@
-webpackJsonp([9],{
-
-/***/ 10:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Connect; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_http__ = __webpack_require__(160);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(269);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_core__ = __webpack_require__(0);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-var Connect = /** @class */ (function () {
-    function Connect(http) {
-        this.http = http;
-        //   private server_url: string = 'http://theparcelpeople.com.au/catalogue/server/';
-        this.server_url = 'http://pikcup.com.au/test/';
-        this.server2 = 'http://theparcelpeople.com.au/catalogue/server/';
-    }
-    Connect.prototype.PostQuery = function (object, parameter) {
-        return this.http.post(this.server_url + object, parameter).map(function (res) { return res.json(); });
-    };
-    Connect.prototype.getList = function (object) {
-        return this.http.get(this.server_url + object).map(function (res) { return res.json(); });
-    };
-    Connect.prototype.getList2 = function (object) {
-        return this.http.get(this.server2 + object).map(function (res) { return res.json(); });
-    };
-    Connect.prototype.logError = function (err) {
-        console.error('Error: ' + err);
-    };
-    Connect.prototype.getServerUrl = function () {
-        return this.server_url;
-    };
-    Connect = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_2__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0__angular_http__["a" /* Http */]])
-    ], Connect);
-    return Connect;
-}());
-
-//# sourceMappingURL=connect.js.map
-
-/***/ }),
-
-/***/ 104:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EditprofilePage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_connect__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_camera__ = __webpack_require__(52);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_http__ = __webpack_require__(53);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-var EditprofilePage = /** @class */ (function () {
-    function EditprofilePage(navCtrl, navParams, connect, camera, http, loadingCtrl) {
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this.connect = connect;
-        this.camera = camera;
-        this.http = http;
-        this.loadingCtrl = loadingCtrl;
-        this.pl = {
-            id: 0,
-            name: 'searching...',
-            dob: '',
-            favplayer: '',
-            position: '',
-            favteam: '',
-            bio: '',
-            awards: '',
-            img: 'https://theparcelpeople.com.au/soccer/general.jpg',
-            picdata: ''
-        };
-    }
-    EditprofilePage.prototype.ionViewDidLoad = function () {
-        var that = this;
-        var url = 'zs_profileinfo.php?id=' + this.navParams.get('id');
-        this.connect.getList(url).subscribe(function (data) {
-            that.pl = data;
-        }, function (err) {
-        });
-    };
-    EditprofilePage.prototype.getpicture = function () {
-        var options = {
-            quality: 70,
-            targetWidth: 500,
-            targetHeight: 500,
-            destinationType: this.camera.DestinationType.DATA_URL,
-            encodingType: this.camera.EncodingType.JPEG,
-            mediaType: this.camera.MediaType.PICTURE
-        };
-        var that = this;
-        this.camera.getPicture(options).then(function (imageData) {
-            that.pl.picdata = imageData;
-            that.pl.img = 'data:image/jpeg;base64,' + imageData;
-        }, function (err) {
-            alert(JSON.stringify(err));
-        });
-    };
-    EditprofilePage.prototype.getcameraroll = function () {
-        var options = {
-            quality: 70,
-            targetWidth: 500,
-            targetHeight: 500,
-            sourceType: 0,
-            destinationType: this.camera.DestinationType.DATA_URL,
-            encodingType: this.camera.EncodingType.JPEG,
-            mediaType: this.camera.MediaType.PICTURE
-        };
-        var that = this;
-        this.camera.getPicture(options).then(function (imageData) {
-            that.pl.picdata = imageData;
-            that.pl.img = 'data:image/jpeg;base64,' + imageData;
-        }, function (err) {
-            alert(JSON.stringify(err));
-        });
-    };
-    EditprofilePage.prototype.doEdit = function () {
-        this.pl.id = this.navParams.get('id');
-        var that = this;
-        var loading = this.loadingCtrl.create({
-            content: 'Please wait...'
-        });
-        loading.present();
-        var url = 'http://pikcup.com.au/test/zs_editprofile.php';
-        this.http.post(url, that.pl, {})
-            .then(function (data) {
-            loading.dismiss();
-            that.navCtrl.pop();
-        })
-            .catch(function (error) {
-            loading.dismiss();
-        });
-    };
-    EditprofilePage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-editprofile',template:/*ion-inline-start:"/var/www/html/ionic/soccer/src/pages/editprofile/editprofile.html"*/'<ion-header no-border no-shadow  style="background-color:white">\n	<ion-navbar align-title="center"  style="background-color:white">\n		<ion-title style="background-color:white"><img src="./assets/img/mainbanner.jpg"></ion-title>\n	</ion-navbar>\n</ion-header>\n\n\n<ion-content no-padding text-center>\n<div style="text-align:center; color:white; background-color:#8EC63F; padding:6px; font-size:1.4em !important; margin-bottom: 0px !important">EDIT PROFILE</div>\n\n<ion-grid>\n<ion-row text-center>\n<ion-col col-1>\n</ion-col>\n<ion-col col-10 text-center>\n<ion-item text-center>\n  <img [src]="pl.img"  style="max-width:300px !important; max-height:300px !important; width:100% !; height:100%">\n</ion-item>\n</ion-col>\n<ion-col col-1>\n</ion-col>\n</ion-row> \n<ion-row>\n<ion-col col-6>\n<button ion-button icon-start (click)="getpicture()">\n<ion-icon name="camera"></ion-icon>\nTake Picture\n</button>\n</ion-col>\n<ion-col col-6>\n<button ion-button icon-end (click)="getcameraroll()">\n<ion-icon name="images"></ion-icon>\nCamera Roll\n</button>\n</ion-col>\n</ion-row>\n\n<ion-row text-center>\n<ion-col col-12>\n<h2>\n{{ pl.name }}\n</h2>\n</ion-col>\n</ion-row>\n</ion-grid>\n<ion-list>\n<ion-item>\n<ion-label for="dob" stacked>Date of Birth</ion-label>\n<ion-input [(ngModel)]="pl.dob"  style="color:dodgerblue"></ion-input>\n</ion-item>\n<ion-item>\n<ion-label for="position" stacked>Position Played</ion-label>\n<ion-input [(ngModel)]="pl.position"  style="color:dodgerblue"></ion-input>\n</ion-item>\n<ion-item>\n<ion-label for="favteam"  stacked>Favourite Team</ion-label>\n<ion-input [(ngModel)]="pl.favteam"  style="color:dodgerblue"></ion-input>\n</ion-item>\n<ion-item>\n<ion-label for="favplayer"  stacked>Favourite Player</ion-label>\n<ion-input [(ngModel)]="pl.favplayer"  style="color:dodgerblue"></ion-input>\n</ion-item>\n<ion-item>\n<ion-label stacked>Awards & Honours</ion-label>\n<ion-textarea [(ngModel)]="pl.awards"  style="color:dodgerblue"></ion-textarea>\n</ion-item>\n<ion-item>\n<ion-label stacked>Bio</ion-label>\n<ion-textarea [(ngModel)]="pl.bio"  style="color:dodgerblue"></ion-textarea>\n</ion-item>\n\n</ion-list>\n</ion-content>\n<ion-footer>\n<button ion-button full color="secondary" (click)="doEdit()">Save</button>\n</ion-footer>\n\n'/*ion-inline-end:"/var/www/html/ionic/soccer/src/pages/editprofile/editprofile.html"*/,
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_connect__["a" /* Connect */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_camera__["a" /* Camera */], __WEBPACK_IMPORTED_MODULE_4__ionic_native_http__["a" /* HTTP */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */]])
-    ], EditprofilePage);
-    return EditprofilePage;
-}());
-
-//# sourceMappingURL=editprofile.js.map
-
-/***/ }),
+webpackJsonp([8],{
 
 /***/ 105:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NewprofPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SponsorPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_connect__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_camera__ = __webpack_require__(52);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_http__ = __webpack_require__(53);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -193,101 +18,27 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-
-
-
-var NewprofPage = /** @class */ (function () {
-    function NewprofPage(navCtrl, navParams, connect, camera, http, loadingCtrl) {
+var SponsorPage = /** @class */ (function () {
+    function SponsorPage(navCtrl, navParams) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
-        this.connect = connect;
-        this.camera = camera;
-        this.http = http;
-        this.loadingCtrl = loadingCtrl;
-        this.pl = {
-            me: 0,
-            id: 0,
-            first: '',
-            middle: '',
-            last: '',
-            dob: '',
-            favplayer: '',
-            position: '',
-            favteam: '',
-            bio: '',
-            awards: '',
-            img: 'https://theparcelpeople.com.au/soccer/general.jpg',
-            picdata: ''
-        };
-        this.pl.me = window.localStorage.getItem('myac');
+        this.sponsorimage = '';
+        this.sponsorimage = 'https://theparcelpeople.com.au/soccer/sponsor.jpg?rnd=' + Math.random();
     }
-    NewprofPage.prototype.ionViewDidLoad = function () {
-        this.pl.me = window.localStorage.getItem('myac');
+    SponsorPage.prototype.ionViewDidLoad = function () {
+        var m = this.navParams.get('id');
+        this.sponsorimage = 'https://theparcelpeople.com.au/soccer/sponsor' + m + '.jpg?rnd=' + Math.random();
     };
-    NewprofPage.prototype.getpicture = function () {
-        var options = {
-            quality: 70,
-            targetWidth: 500,
-            targetHeight: 500,
-            destinationType: this.camera.DestinationType.DATA_URL,
-            encodingType: this.camera.EncodingType.JPEG,
-            mediaType: this.camera.MediaType.PICTURE
-        };
-        var that = this;
-        this.camera.getPicture(options).then(function (imageData) {
-            that.pl.picdata = imageData;
-            that.pl.img = 'data:image/jpeg;base64,' + imageData;
-        }, function (err) {
-            //    alert(JSON.stringify(err));
-        });
-    };
-    NewprofPage.prototype.getcameraroll = function () {
-        var options = {
-            quality: 70,
-            targetWidth: 500,
-            targetHeight: 500,
-            sourceType: 0,
-            destinationType: this.camera.DestinationType.DATA_URL,
-            encodingType: this.camera.EncodingType.JPEG,
-            mediaType: this.camera.MediaType.PICTURE
-        };
-        var that = this;
-        this.camera.getPicture(options).then(function (imageData) {
-            that.pl.picdata = imageData;
-            that.pl.img = 'data:image/jpeg;base64,' + imageData;
-        }, function (err) {
-            //    alert(JSON.stringify(err));
-        });
-    };
-    NewprofPage.prototype.doEdit = function () {
-        var that = this;
-        var loading = this.loadingCtrl.create({
-            content: 'Please wait...'
-        });
-        loading.present();
-        var url = 'http://pikcup.com.au/test/zs_newprofile.php';
-        this.http.post(url, that.pl, {})
-            .then(function (data) {
-            loading.dismiss();
-            alert(JSON.stringify(data.data));
-            window.localStorage.setItem('newplayer', data.data);
-            that.navCtrl.pop();
-        })
-            .catch(function (error) {
-            loading.dismiss();
-        });
-    };
-    NewprofPage = __decorate([
+    SponsorPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-newprof',template:/*ion-inline-start:"/var/www/html/ionic/soccer/src/pages/newprof/newprof.html"*/'<ion-header no-border no-shadow  style="background-color:white">\n	<ion-navbar align-title="center"  style="background-color:white">\n		<ion-title style="background-color:white"><img src="./assets/img/mainbanner.jpg"></ion-title>\n	</ion-navbar>\n</ion-header>\n\n\n<ion-content no-padding text-center>\n<div style="text-align:center; color:white; background-color:#8EC63F; padding:6px; font-size:1.4em !important; margin-bottom: 0px !important">CREATE PROFILE</div>\n\n<ion-grid>\n<ion-row text-center>\n<ion-col col-1>\n</ion-col>\n<ion-col col-10 text-center>\n<ion-item text-center>\n  <img [src]="pl.img"  style="max-width:300px !important; max-height:300px !important; width:100% !; height:100%">\n</ion-item>\n</ion-col>\n<ion-col col-1>\n</ion-col>\n</ion-row> \n<ion-row>\n<ion-col col-6>\n<button ion-button icon-start (click)="getpicture()">\n<ion-icon name="camera"></ion-icon>\nTake Picture\n</button>\n</ion-col>\n<ion-col col-6>\n<button ion-button icon-end (click)="getcameraroll()">\n<ion-icon name="images"></ion-icon>\nCamera Roll\n</button>\n</ion-col>\n</ion-row>\n</ion-grid>\n<ion-list>\n<ion-item>\n<ion-label for="first" stacked>First Name</ion-label>\n<ion-input [(ngModel)]="pl.first"  style="color:dodgerblue"></ion-input>\n</ion-item>\n<ion-item>\n<ion-label for="middle" stacked>Middle Name(s)</ion-label>\n<ion-input [(ngModel)]="pl.middle"  style="color:dodgerblue"></ion-input>\n</ion-item>\n\n<ion-item>\n<ion-label for="last" stacked>Surname</ion-label>\n<ion-input [(ngModel)]="pl.last"  style="color:dodgerblue"></ion-input>\n</ion-item>\n\n<ion-item>\n<ion-label for="dob" stacked>Date of Birth</ion-label>\n<ion-input [(ngModel)]="pl.dob"  style="color:dodgerblue"></ion-input>\n</ion-item>\n<ion-item>\n<ion-label for="position" stacked>Position Played</ion-label>\n<ion-input [(ngModel)]="pl.position"  style="color:dodgerblue"></ion-input>\n</ion-item>\n<ion-item>\n<ion-label for="favteam"  stacked>Favourite Team</ion-label>\n<ion-input [(ngModel)]="pl.favteam"  style="color:dodgerblue"></ion-input>\n</ion-item>\n<ion-item>\n<ion-label for="favplayer"  stacked>Favourite Player</ion-label>\n<ion-input [(ngModel)]="pl.favplayer"  style="color:dodgerblue"></ion-input>\n</ion-item>\n<ion-item>\n<ion-label stacked>Awards & Honours</ion-label>\n<ion-textarea [(ngModel)]="pl.awards"  style="color:dodgerblue"></ion-textarea>\n</ion-item>\n<ion-item>\n<ion-label stacked>Bio</ion-label>\n<ion-textarea [(ngModel)]="pl.bio"  style="color:dodgerblue"></ion-textarea>\n</ion-item>\n\n</ion-list>\n</ion-content>\n<ion-footer>\n<button ion-button full color="secondary" (click)="doEdit()">Save</button>\n</ion-footer>\n\n'/*ion-inline-end:"/var/www/html/ionic/soccer/src/pages/newprof/newprof.html"*/,
+            selector: 'page-sponsor',template:/*ion-inline-start:"/var/www/html/ionic/soccer/src/pages/sponsor/sponsor.html"*/'<ion-header no-border no-shadow  style="background-color:white">\n	<ion-navbar align-title="center"  style="background-color:white">\n		<ion-title style="background-color:white"><img src="./assets/img/mainbanner.jpg"></ion-title>\n	</ion-navbar>\n</ion-header>\n\n<ion-content>\n<img [src]="sponsorimage" style="width:100%">\n</ion-content>\n'/*ion-inline-end:"/var/www/html/ionic/soccer/src/pages/sponsor/sponsor.html"*/,
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__providers_connect__["a" /* Connect */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_connect__["a" /* Connect */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__ionic_native_camera__["a" /* Camera */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__ionic_native_camera__["a" /* Camera */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_4__ionic_native_http__["a" /* HTTP */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__ionic_native_http__["a" /* HTTP */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */]) === "function" && _f || Object])
-    ], NewprofPage);
-    return NewprofPage;
-    var _a, _b, _c, _d, _e, _f;
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */]])
+    ], SponsorPage);
+    return SponsorPage;
 }());
 
-//# sourceMappingURL=newprof.js.map
+//# sourceMappingURL=sponsor.js.map
 
 /***/ }),
 
@@ -298,7 +49,7 @@ var NewprofPage = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EnterCreditCardPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_connect__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_connect__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_stripe__ = __webpack_require__(161);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -434,8 +185,8 @@ var EnterCreditCardPage = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TeamplayersPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_connect__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__profile_profile__ = __webpack_require__(82);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_connect__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__profile_profile__ = __webpack_require__(83);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -461,18 +212,20 @@ var TeamplayersPage = /** @class */ (function () {
         this.navParams = navParams;
         this.connect = connect;
         this.players = [];
+        this.feed = [];
         this.team = 0;
-        this.mode = 0;
+        this.mode = 3;
         var tt = this.navParams.get('t');
         this.teamname = tt.name;
         this.team = tt.id;
     }
     TeamplayersPage.prototype.ionViewDidLoad = function () {
-        this.mode = 0;
+        this.mode = 3;
         var that = this;
         var url = 'zs_teaminfo.php?id=' + this.team;
         this.connect.getList(url).subscribe(function (data) {
             that.players = data.players;
+            that.feed = data.feed;
         }, function (err) {
         });
     };
@@ -482,9 +235,20 @@ var TeamplayersPage = /** @class */ (function () {
     TeamplayersPage.prototype.goPlayer = function (p) {
         this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__profile_profile__["a" /* ProfilePage */], { player: p });
     };
+    TeamplayersPage.prototype.uptick = function (a) {
+        if (!this.feed[a].liked) {
+            this.feed[a].likes++;
+            this.feed[a].liked = true;
+            var that = this;
+            var url = 'zs_uptick.php?id=' + this.feed[a].id;
+            this.connect.getList(url).subscribe(function (data) {
+            }, function (err) {
+            });
+        }
+    };
     TeamplayersPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-teamplayers',template:/*ion-inline-start:"/var/www/html/ionic/soccer/src/pages/teamplayers/teamplayers.html"*/'<ion-header no-border no-shadow  style="background-color:white">\n	<ion-navbar align-title="center"  style="background-color:white">\n		<ion-title style="background-color:white"><img src="./assets/img/mainbanner.jpg"></ion-title>\n	</ion-navbar>\n</ion-header>\n\n\n<ion-content no-padding text-center>\n<div style="text-align:center; color:white; background-color:#8EC63F; padding:6px; font-size:1.4em !important; margin-bottom: 0px !important">{{ teamname }}</div>\n<div *ngIf="mode==0">\n<ion-list>\n<ion-item *ngFor="let p of players"  class="borderBottomGainsboroAlpha" (click)="goPlayer(p)">\n<ion-avatar item-start>\n <img [src]="p.pic">\n</ion-avatar>\n<h2>{{ p.name }}</h2>\n</ion-item>\n</ion-list>\n</div>\n<div *ngIf="mode==1">\n Fixtures coming soon\n</div>\n<div *ngIf="mode==2">\n Ladder coming soon\n</div>\n<div *ngIf="mode==3">\n Team news coming soon\n</div>\n</ion-content>\n\n<ion-footer>\n<ion-grid no-padding>\n<ion-row text-center>\n <ion-col col-3 (click)="gomode(0)">\n <ion-icon name="people"> </ion-icon>\n </ion-col>\n <ion-col col-3 (click)="gomode(1)">\n <ion-icon name="calendar"> </ion-icon>\n </ion-col>\n\n <ion-col col-3 (click)="gomode(2)" >\n <ion-icon name="trophy"> </ion-icon>\n </ion-col>\n\n <ion-col col-3 (click)="gomode(3)" >\n <ion-icon name="paper"> </ion-icon>\n </ion-col>\n</ion-row>\n<ion-row text-center>\n\n <ion-col col-3 (click)="gomode(0)">\n Players\n </ion-col>\n\n <ion-col col-3 (click)="gomode(1)">\n Fixtures\n </ion-col>\n\n <ion-col col-3 (click)="gomode(2)" >\n Ladder\n </ion-col>\n\n <ion-col col-3 (click)="gomode(3)">\n News\n </ion-col>\n</ion-row>\n\n</ion-grid>\n</ion-footer>\n'/*ion-inline-end:"/var/www/html/ionic/soccer/src/pages/teamplayers/teamplayers.html"*/,
+            selector: 'page-teamplayers',template:/*ion-inline-start:"/var/www/html/ionic/soccer/src/pages/teamplayers/teamplayers.html"*/'<ion-header no-border no-shadow  style="background-color:white">\n	<ion-navbar align-title="center"  style="background-color:white">\n		<ion-title style="background-color:white"><img src="./assets/img/mainbanner.jpg"></ion-title>\n	</ion-navbar>\n</ion-header>\n\n\n<ion-content no-padding text-center>\n<div style="text-align:center; color:white; background-color:#8EC63F; padding:6px; font-size:1.4em !important; margin-bottom: 0px !important">{{ teamname }}</div>\n<div *ngIf="mode==0">\n<ion-list>\n<ion-item *ngFor="let p of players"  class="borderBottomGainsboroAlpha" (click)="goPlayer(p)">\n<ion-avatar item-start>\n <img [src]="p.pic">\n</ion-avatar>\n<h2>{{ p.name }}</h2>\n</ion-item>\n</ion-list>\n</div>\n<div *ngIf="mode==1">\n Fixtures coming soon\n</div>\n<div *ngIf="mode==2">\n Ladder coming soon\n</div>\n<div *ngIf="mode==3">\n		<ion-list no-lines text-wrap >\n			<ion-item *ngFor="let f of feed"  class="borderBottomGainsboroAlpha">\n<img [src]="f.img" style="width:100%">\n<p style="font-weight:bold; margin-bottom:10px">{{ f.title }}</p>\n<p [innerHTML]="f.txt"> </p>\n<ion-grid>\n<ion-row>\n<ion-col col-6>\n{{ f.likes }} likes</ion-col>\n<ion-col col-6 text-right (click)="uptick(f.pos)">\n<ion-icon name="thumbs-up"> </ion-icon>\n</ion-col>\n</ion-row>\n</ion-grid>\n</ion-item>\n</ion-list>\n<ion-item style="height:200px; min-height:200px"> &nbsp;\n</ion-item>\n\n</div>\n</ion-content>\n\n<ion-footer>\n<ion-grid no-padding>\n<ion-row text-center>\n <ion-col col-3 (click)="gomode(0)">\n <ion-icon name="people"> </ion-icon>\n </ion-col>\n <ion-col col-3 (click)="gomode(1)">\n <ion-icon name="calendar"> </ion-icon>\n </ion-col>\n\n <ion-col col-3 (click)="gomode(2)" >\n <ion-icon name="trophy"> </ion-icon>\n </ion-col>\n\n <ion-col col-3 (click)="gomode(3)" >\n <ion-icon name="paper"> </ion-icon>\n </ion-col>\n</ion-row>\n<ion-row text-center>\n\n <ion-col col-3 (click)="gomode(0)">\n Players\n </ion-col>\n\n <ion-col col-3 (click)="gomode(1)">\n Fixtures\n </ion-col>\n\n <ion-col col-3 (click)="gomode(2)" >\n Ladder\n </ion-col>\n\n <ion-col col-3 (click)="gomode(3)">\n News\n </ion-col>\n</ion-row>\n\n</ion-grid>\n</ion-footer>\n'/*ion-inline-end:"/var/www/html/ionic/soccer/src/pages/teamplayers/teamplayers.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_connect__["a" /* Connect */]])
     ], TeamplayersPage);
@@ -517,39 +281,35 @@ webpackEmptyAsyncContext.id = 117;
 
 var map = {
 	"../pages/book/book.module": [
-		296,
-		8
-	],
-	"../pages/enter-credit-card/enter-credit-card.module": [
-		297,
+		298,
 		7
 	],
-	"../pages/events/events.module": [
-		298,
+	"../pages/enter-credit-card/enter-credit-card.module": [
+		299,
 		6
 	],
 	"../pages/marketitem/marketitem.module": [
-		299,
+		300,
 		5
 	],
 	"../pages/sell/sell.module": [
-		300,
+		301,
 		3
 	],
 	"../pages/teamfixtures/teamfixtures.module": [
-		301,
+		302,
 		2
 	],
 	"../pages/teamladder/teamladder.module": [
-		302,
+		303,
 		1
 	],
 	"../pages/teamnews/teamnews.module": [
-		303,
+		304,
 		0
 	],
 	"../pages/teamplayers/teamplayers.module": [
-		304,
+		305,
 		4
 	]
 };
@@ -579,14 +339,16 @@ module.exports = webpackAsyncContext;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__players_players__ = __webpack_require__(205);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__login_login__ = __webpack_require__(206);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__membership_membership__ = __webpack_require__(208);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__teams_teams__ = __webpack_require__(209);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__sponsor_sponsor__ = __webpack_require__(210);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__socialupload_socialupload__ = __webpack_require__(211);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__info_info__ = __webpack_require__(213);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__providers_connect__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__market_market__ = __webpack_require__(214);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__myprofiles_myprofiles__ = __webpack_require__(215);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__tipping_tipping__ = __webpack_require__(216);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__teams_teams__ = __webpack_require__(211);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__sponsor_sponsor__ = __webpack_require__(105);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__socialupload_socialupload__ = __webpack_require__(212);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__info_info__ = __webpack_require__(214);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__providers_connect__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__market_market__ = __webpack_require__(215);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__myprofiles_myprofiles__ = __webpack_require__(216);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__tiphome_tiphome__ = __webpack_require__(218);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__history_history__ = __webpack_require__(220);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__events_events__ = __webpack_require__(221);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -609,11 +371,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
+
 var HomePage = /** @class */ (function () {
     function HomePage(navCtrl, connect, alertCtrl) {
         this.navCtrl = navCtrl;
         this.connect = connect;
         this.alertCtrl = alertCtrl;
+        this.thisversion = 1;
         this.banner = './assets/img/blankbanner.jpg';
         this.myAc = '';
         this.hmode = 0;
@@ -621,17 +386,22 @@ var HomePage = /** @class */ (function () {
         this.feed = [];
         this.manager = false;
         this.hmode = 0;
+        this.thisversion = 1;
     }
     HomePage.prototype.ionViewDidEnter = function () {
         this.myAc = window.localStorage.getItem('myac');
         if (!this.myAc)
             this.myAc = '';
+        window.localStorage.removeItem('newplayer');
         var that = this;
         var url = 'zs_socialfeed.php?me=' + that.myAc;
         this.connect.getList(url).subscribe(function (data) {
             that.feed = data.feed;
             that.banner = data.banner;
             that.manager = data.manager;
+            var v = parseInt(data.version);
+            if (v > that.thisversion)
+                that.versionmessage(v);
         }, function (err) {
         });
         if (this.myAc.length) {
@@ -641,9 +411,14 @@ var HomePage = /** @class */ (function () {
                 this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_4__membership_membership__["a" /* MembershipPage */]);
             if (m == 2)
                 this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_11__myprofiles_myprofiles__["a" /* MyprofilesPage */]);
+            if (m == 3)
+                this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_12__tiphome_tiphome__["a" /* TiphomePage */]);
+            if (m == 4)
+                this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_13__history_history__["a" /* HistoryPage */]);
         }
     };
     HomePage.prototype.goEvents = function () {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_14__events_events__["a" /* EventsPage */]);
     };
     HomePage.prototype.goMarket = function () {
         this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_10__market_market__["a" /* MarketPage */], { id: 1 });
@@ -655,13 +430,18 @@ var HomePage = /** @class */ (function () {
         this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_5__teams_teams__["a" /* TeamsPage */]);
     };
     HomePage.prototype.showSponsor = function () {
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_6__sponsor_sponsor__["a" /* SponsorPage */]);
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_6__sponsor_sponsor__["a" /* SponsorPage */], { id: 1 });
     };
     HomePage.prototype.showPlayers = function () {
         this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__players_players__["a" /* PlayersPage */]);
     };
     HomePage.prototype.tipping = function () {
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_12__tipping_tipping__["a" /* TippingPage */]);
+        if (this.myAc.length)
+            this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_12__tiphome_tiphome__["a" /* TiphomePage */]);
+        else {
+            this.hmode = 3;
+            this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__login_login__["a" /* LoginPage */]);
+        }
     };
     HomePage.prototype.showUpload = function () {
         this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_7__socialupload_socialupload__["a" /* SocialuploadPage */]);
@@ -669,6 +449,7 @@ var HomePage = /** @class */ (function () {
     HomePage.prototype.doLogout = function () {
         this.myAc = '';
         window.localStorage.removeItem('myac');
+        window.localStorage.removeItem('userPayment');
     };
     HomePage.prototype.login = function () {
         this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__login_login__["a" /* LoginPage */]);
@@ -678,6 +459,14 @@ var HomePage = /** @class */ (function () {
             this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_4__membership_membership__["a" /* MembershipPage */]);
         else {
             this.hmode = 1;
+            this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__login_login__["a" /* LoginPage */]);
+        }
+    };
+    HomePage.prototype.history = function () {
+        if (this.myAc.length)
+            this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_13__history_history__["a" /* HistoryPage */]);
+        else {
+            this.hmode = 4;
             this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__login_login__["a" /* LoginPage */]);
         }
     };
@@ -712,6 +501,23 @@ var HomePage = /** @class */ (function () {
         });
         alert.present();
     };
+    HomePage.prototype.versionmessage = function (a) {
+        this.thisversion = a;
+        var that = this;
+        var alert = this.alertCtrl.create({
+            title: 'New Version Available',
+            subTitle: 'Please go to the App Store or Google Play Store to get the latest version of this App',
+            buttons: [
+                {
+                    text: 'OK',
+                    role: 'cancel',
+                    handler: function () {
+                    }
+                }
+            ]
+        });
+        alert.present();
+    };
     HomePage.prototype.uptick = function (a) {
         if (!this.feed[a].liked) {
             this.feed[a].likes++;
@@ -725,7 +531,7 @@ var HomePage = /** @class */ (function () {
     };
     HomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-home',template:/*ion-inline-start:"/var/www/html/ionic/soccer/src/pages/home/home.html"*/'<ion-header no-border no-shadow  style="background-color:white">\n	<ion-navbar align-title="center"  style="background-color:white">\n		<button ion-button menuToggle color="dark"><ion-icon name="menu"></ion-icon></button>\n		<ion-title style="background-color:white"><img src="./assets/img/mainbanner.jpg"></ion-title>\n	</ion-navbar>\n</ion-header>\n<ion-menu id="mainmenu" [content]="myMenum" style="overflow:hidden" [persistent]=true >\n	<ion-content class="menucontainer">\n		<ion-item-group class="paddingMenu">\n\n			<button ion-item (click)="myprofiles()" class="list-item menuitems" menuClose>\n			   My Profiles\n			</button>\n			\n			\n			<button ion-item (click)="membership()" class="list-item menuitems" menuClose>\n			   Fixtures & Ladders\n			</button>\n\n<button ion-item (click)="tipping()" class="list-item menuitems" menuClose>\n			   Tipping Competition\n			</button>\n			<button ion-item (click)="membership()" class="list-item menuitems" menuClose>\n			   Marketplace\n			</button>\n			<button ion-item (click)="goInfo(1)" class="list-item menuitems" menuClose>\n			   Club Policies\n			</button>\n			<button ion-item (click)="goEvents()" class="list-item menuitems" menuClose>\n			   Feedback\n			</button>\n			<button ion-item (click)="goInfo(2)" class="list-item menuitems" menuClose>\n			   Contact\n			</button>\n\n\n<div *ngIf="myAc.length">	\n			<button ion-item (click)="signOutAlert()" class="list-item menuitems" menuClose>\n			   Sign Out\n			</button>\n</div>			\n		</ion-item-group>\n	</ion-content>\n</ion-menu>\n\n<ion-content #myMenum text-center>\n<div *ngIf="manager">\n<button ion-item (click)="showUpload()" full>Management Post</button>\n</div>\n		<ion-list no-lines text-wrap >\n			<ion-item *ngFor="let f of feed"  class="borderBottomGainsboroAlpha">\n<img [src]="f.img" style="width:100%">\n<p style="font-weight:bold; margin-bottom:10px">{{ f.title }}</p>\n<p [innerHTML]="f.txt"> </p>\n<ion-grid>\n<ion-row>\n<ion-col col-6>\n{{ f.likes }} likes</ion-col>\n<ion-col col-6 text-right (click)="uptick(f.pos)">\n<ion-icon name="thumbs-up"> </ion-icon>\n</ion-col>\n</ion-row>\n</ion-grid>\n</ion-item>\n</ion-list>\n<ion-item style="height:200px; min-height:200px"> &nbsp;\n</ion-item>\n</ion-content>\n\n<ion-footer>\n<img [src]="banner" style="width:100%" (click)="showSponsor()">\n<ion-grid no-padding>\n<ion-row text-center>\n <ion-col col-3 (click)="membership()">\n <ion-icon name="create"> </ion-icon>\n </ion-col>\n <ion-col col-3 (click)="teams()">\n <ion-icon name="people"> </ion-icon>\n </ion-col>\n\n <ion-col col-3 (click)="showPlayers()" >\n <ion-icon name="calendar"> </ion-icon>\n </ion-col>\n\n <ion-col col-3 (click)="goMarket()">\n <ion-icon name="basket"> </ion-icon>\n </ion-col>\n</ion-row>\n<ion-row text-center>\n\n <ion-col col-3 (click)="membership()">\n Register\n </ion-col>\n\n <ion-col col-3 (click)="teams()">\n Teams\n </ion-col>\n\n <ion-col col-3 (click)="goEvents()" >\n Events\n </ion-col>\n\n <ion-col col-3 (click)="goMarket()" >\n Market\n </ion-col>\n</ion-row>\n\n</ion-grid>\n</ion-footer>\n'/*ion-inline-end:"/var/www/html/ionic/soccer/src/pages/home/home.html"*/
+            selector: 'page-home',template:/*ion-inline-start:"/var/www/html/ionic/soccer/src/pages/home/home.html"*/'<ion-header no-border no-shadow  style="background-color:white">\n	<ion-navbar align-title="center"  style="background-color:white">\n		<button ion-button menuToggle color="dark"><ion-icon name="menu"></ion-icon></button>\n		<ion-title style="background-color:white"><img src="./assets/img/mainbanner.jpg"></ion-title>\n	</ion-navbar>\n</ion-header>\n<ion-menu id="mainmenu" [content]="myMenum" style="overflow:hidden" [persistent]=true >\n	<ion-content class="menucontainer">\n		<ion-item-group class="paddingMenu">\n\n			<button ion-item (click)="myprofiles()" class="list-item menuitems" menuClose>\n			   My Profiles\n			</button>\n			\n			\n			<button ion-item (click)="goInfo(3)" class="list-item menuitems" menuClose>\n			   Fixtures & Ladders\n			</button>\n\n<button ion-item (click)="tipping()" class="list-item menuitems" menuClose>\n			   Tipping Competition\n			</button>\n			<button ion-item (click)="membership()" class="list-item menuitems" menuClose>\n			   Marketplace\n			</button>\n<button ion-item (click)="history()" class="list-item menuitems" menuClose>\n			   Payment History\n			</button>\n\n			<button ion-item (click)="goInfo(1)" class="list-item menuitems" menuClose>\n			   Club Policies\n			</button>\n			<button ion-item (click)="goEvents()" class="list-item menuitems" menuClose>\n			   Feedback\n			</button>\n			<button ion-item (click)="goInfo(2)" class="list-item menuitems" menuClose>\n			   Contact\n			</button>\n\n\n<div *ngIf="myAc.length">	\n			<button ion-item (click)="signOutAlert()" class="list-item menuitems" menuClose>\n			   Sign Out\n			</button>\n</div>			\n		</ion-item-group>\n	</ion-content>\n</ion-menu>\n\n<ion-content #myMenum text-center>\n<div *ngIf="manager">\n<button ion-item (click)="showUpload()" full>Management Post</button>\n</div>\n		<ion-list no-lines text-wrap >\n			<ion-item *ngFor="let f of feed"  class="borderBottomGainsboroAlpha">\n<img [src]="f.img" style="width:100%">\n<p style="font-weight:bold; margin-bottom:10px">{{ f.title }}</p>\n<p [innerHTML]="f.txt"> </p>\n<ion-grid>\n<ion-row>\n<ion-col col-6>\n{{ f.likes }} likes</ion-col>\n<ion-col col-6 text-right (click)="uptick(f.pos)">\n<ion-icon name="thumbs-up"> </ion-icon>\n</ion-col>\n</ion-row>\n</ion-grid>\n</ion-item>\n</ion-list>\n<ion-item style="height:200px; min-height:200px"> &nbsp;\n</ion-item>\n</ion-content>\n\n<ion-footer>\n<img [src]="banner" style="width:100%" (click)="showSponsor()">\n<ion-grid no-padding>\n<ion-row text-center>\n <ion-col col-3 (click)="membership()">\n <ion-icon name="create"> </ion-icon>\n </ion-col>\n <ion-col col-3 (click)="teams()">\n <ion-icon name="people"> </ion-icon>\n </ion-col>\n\n <ion-col col-3 (click)="showPlayers()" >\n <ion-icon name="calendar"> </ion-icon>\n </ion-col>\n\n <ion-col col-3 (click)="goMarket()">\n <ion-icon name="basket"> </ion-icon>\n </ion-col>\n</ion-row>\n<ion-row text-center>\n\n <ion-col col-3 (click)="membership()">\n Register\n </ion-col>\n\n <ion-col col-3 (click)="teams()">\n Teams\n </ion-col>\n\n <ion-col col-3 (click)="goEvents()" >\n Events\n </ion-col>\n\n <ion-col col-3 (click)="goMarket()" >\n Market\n </ion-col>\n</ion-row>\n\n</ion-grid>\n</ion-footer>\n'/*ion-inline-end:"/var/www/html/ionic/soccer/src/pages/home/home.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_9__providers_connect__["a" /* Connect */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]])
     ], HomePage);
@@ -743,8 +549,8 @@ var HomePage = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PlayersPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_connect__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__profile_profile__ = __webpack_require__(82);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_connect__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__profile_profile__ = __webpack_require__(83);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -812,7 +618,7 @@ var PlayersPage = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_connect__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_connect__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__register_register__ = __webpack_require__(207);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -926,7 +732,7 @@ var LoginPage = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RegisterPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_connect__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_connect__ = __webpack_require__(8);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1009,9 +815,9 @@ var RegisterPage = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MembershipPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_connect__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__editprofile_editprofile__ = __webpack_require__(104);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__newprof_newprof__ = __webpack_require__(105);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_connect__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__new_new__ = __webpack_require__(209);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__newprof_newprof__ = __webpack_require__(52);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1045,22 +851,31 @@ var MembershipPage = /** @class */ (function () {
         if (!this.myAc)
             this.myAc = '';
         var that = this;
-        var url = 'zs_myplayers.php?id=' + this.myAc;
-        this.connect.getList(url).subscribe(function (data) {
-            that.players = data.players;
-        }, function (err) {
-        });
+        var n = window.localStorage.getItem('newplayer');
+        if (!n)
+            n = '0';
+        window.localStorage.removeItem('newplayer');
+        if (parseInt(n) > 0)
+            this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__new_new__["a" /* NewPage */], { id: parseInt(n) });
+        else {
+            var url = 'zs_myplayers.php?id=' + this.myAc;
+            this.connect.getList(url).subscribe(function (data) {
+                that.players = data.players;
+            }, function (err) {
+            });
+        }
     };
     MembershipPage.prototype.newreg = function () {
         window.localStorage.removeItem('goback');
+        window.localStorage.removeItem('newplayer');
         this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_4__newprof_newprof__["a" /* NewprofPage */]);
     };
     MembershipPage.prototype.goPlayer = function (a) {
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__editprofile_editprofile__["a" /* EditprofilePage */], { id: a });
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__new_new__["a" /* NewPage */], { id: a });
     };
     MembershipPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-membership',template:/*ion-inline-start:"/var/www/html/ionic/soccer/src/pages/membership/membership.html"*/'<ion-header no-border no-shadow  style="background-color:white">\n	<ion-navbar align-title="center"  style="background-color:white">\n		<ion-title style="background-color:white"><img src="./assets/img/mainbanner.jpg"></ion-title>\n	</ion-navbar>\n</ion-header>\n\n\n<ion-content no-padding text-center>\n<div style="text-align:center; color:white; background-color:#8EC63F; padding:6px; font-size:1.4em !important; margin-bottom: 0px !important">MY PLAYER PROFILES</div>\n<ion-list no-lines text-wrap >\n  <ion-item *ngFor="let p of players"  class="borderBottomGainsboroAlpha" (click)="goPlayer(p.id)">\n    <p>{{ p.name }}</p>\n    <small> {{ p.division }} </small>\n  </ion-item>\n<ion-item>\n<button ion-button full (click)="newreg()" style="height:70px; min-height:70px">NEW PROFILE</button>\n</ion-item>\n</ion-list>\n</ion-content>\n'/*ion-inline-end:"/var/www/html/ionic/soccer/src/pages/membership/membership.html"*/,
+            selector: 'page-membership',template:/*ion-inline-start:"/var/www/html/ionic/soccer/src/pages/membership/membership.html"*/'<ion-header no-border no-shadow  style="background-color:white">\n	<ion-navbar align-title="center"  style="background-color:white">\n		<ion-title style="background-color:white"><img src="./assets/img/mainbanner.jpg"></ion-title>\n	</ion-navbar>\n</ion-header>\n\n\n<ion-content no-padding text-center>\n<div style="text-align:center; color:white; background-color:#8EC63F; padding:6px; font-size:1.4em !important; margin-bottom: 0px !important">REGISTRATION</div>\n<ion-row>\n<ion-col col-1>\n</ion-col>\n<ion-col col-10>\n<p>Please choose an existing player to register, or create a new player</p>\n</ion-col>\n<ion-col col-1>\n</ion-col>\n</ion-row>\n<ion-list text-wrap>\n<ion-item *ngFor="let p of players"  class="borderBottomGainsboroAlpha" (click)="goPlayer(p.id)">\n<ion-avatar item-start>\n <img [src]="p.img">\n</ion-avatar>\n<h2>{{ p.name }}</h2>\n</ion-item>\n<ion-item>\n<button ion-button full (click)="newreg()" style="height:60px; min-height:60px">NEW PLAYER</button>\n</ion-item>\n</ion-list>\n</ion-content>\n'/*ion-inline-end:"/var/www/html/ionic/soccer/src/pages/membership/membership.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_connect__["a" /* Connect */]])
     ], MembershipPage);
@@ -1075,10 +890,299 @@ var MembershipPage = /** @class */ (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NewPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_connect__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__payment_payment__ = __webpack_require__(210);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var NewPage = /** @class */ (function () {
+    function NewPage(navCtrl, navParams, connect, loadingCtrl, toastCtrl) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.connect = connect;
+        this.loadingCtrl = loadingCtrl;
+        this.toastCtrl = toastCtrl;
+        this.teams = [];
+        this.player = 0;
+        this.reg = {
+            id: '',
+            firstname: '',
+            middlename: '',
+            lastname: '',
+            phoneh: '',
+            phonem: '',
+            postcode: '',
+            email: '',
+            address: '',
+            gender: 'M',
+            dob: '',
+            contact: 'K',
+            cname: '',
+            cadd: '',
+            cphone: '',
+            shirt: '',
+            division: 0,
+            medical: ''
+        };
+        this.teams = [];
+    }
+    NewPage.prototype.ionViewDidLoad = function () {
+        var that = this;
+        this.player = this.navParams.get('id');
+        var url = 'zs_newreg.php?id=' + this.player;
+        this.connect.getList(url).subscribe(function (data) {
+            that.teams = data.teams;
+            that.reg = data.reg;
+        }, function (err) {
+            that.connect.logError(err);
+        });
+    };
+    NewPage.prototype.ionViewDidEnter = function () {
+        if (window.localStorage.getItem('goback') == 'yes') {
+            window.localStorage.removeItem('goback');
+            this.navCtrl.pop();
+        }
+    };
+    NewPage.prototype.presentToast = function (text) {
+        var toast = this.toastCtrl.create({
+            message: text,
+            duration: 2000,
+            position: 'top'
+        });
+        toast.present();
+    };
+    NewPage.prototype.doRegister = function () {
+        var msg = '';
+        if (!this.reg.division)
+            msg = "Please choose a team";
+        if ((this.reg.firstname.length < 1) || (this.reg.lastname.length < 1))
+            msg = "Please enter the player's name";
+        if (msg.length)
+            this.presentToast(msg);
+        else {
+            var that_1 = this;
+            var loading_1 = this.loadingCtrl.create({
+                content: 'Please wait...'
+            });
+            loading_1.present();
+            var url = 'zs_playerregister.php?me=' + window.localStorage.getItem('myac') + '&reg=' + JSON.stringify(this.reg);
+            console.log(url);
+            this.connect.getList(url).subscribe(function (data) {
+                loading_1.dismiss();
+                if (data.success) {
+                    window.localStorage.setItem('newreg', data.id);
+                    that_1.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__payment_payment__["a" /* PaymentPage */], { id: data.id });
+                }
+            }, function (err) {
+                loading_1.dismiss();
+                that_1.presentToast("Could not register player");
+                that_1.connect.logError(err);
+            });
+        }
+    };
+    NewPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'page-new',template:/*ion-inline-start:"/var/www/html/ionic/soccer/src/pages/new/new.html"*/'<ion-header>\n	<ion-navbar align-title="center"  style="background-color:white">\n		<ion-title style="background-color:white">New Registration</ion-title>\n       </ion-navbar>\n</ion-header>\n\n<ion-content>\n <ion-grid>\n <ion-row>\n   <ion-col>\n<p>Please fill out the details below to register.</p>\n </ion-col>\n</ion-row>\n			<ion-row>\n				<ion-col>\n					<ion-list>\n						<ion-item>\n							<ion-label color="primary" floating>Player\'s First Name</ion-label>\n							<ion-input type="text" [(ngModel)]="reg.firstname"></ion-input>\n						</ion-item>\n						<ion-item>\n							<ion-label color="primary" floating>Middle Name</ion-label>\n							<ion-input type="text"[(ngModel)]="reg.middlename"></ion-input>\n						</ion-item>\n						<ion-item>\n							<ion-label color="primary" floating>Surname</ion-label>\n							<ion-input type="text" [(ngModel)]="reg.lastname"></ion-input>\n						</ion-item>\n\n						<ion-item>\n							<ion-label color="primary" floating>Address</ion-label>\n							<ion-input type="text"[(ngModel)]="reg.address" required></ion-input>\n						</ion-item>\n\n						<ion-item>\n							<ion-label color="primary" floating>Postal Code</ion-label>\n							<ion-input type="text"[(ngModel)]="reg.postcode" required></ion-input>\n						</ion-item>\n						<ion-item>\n							<ion-label color="primary" floating>Home Phone</ion-label>\n							<ion-input type="text"[(ngModel)]="reg.phoneh" required></ion-input>\n						</ion-item>\n						<ion-item>\n							<ion-label color="primary" floating>Mobile</ion-label>\n							<ion-input type="text"[(ngModel)]="reg.phonem" required></ion-input>\n						</ion-item>\n						<ion-item>\n							<ion-label color="primary" floating>Email Address</ion-label>\n							<ion-input type="email"[(ngModel)]="reg.email" required></ion-input>\n						</ion-item>\n                                          <ion-item>\n                           <ion-label color="primary" floating>Gender</ion-label>\n				<ion-select [(ngModel)]="reg.gender" popover>\n	<ion-option value="M">Male</ion-option>\n	<ion-option value="F">Female</ion-option>\n       </ion-select>\n                                              </ion-item> \n						<ion-item>\n							<ion-label color="primary" floating>Date of Birth</ion-label>\n							<ion-input type="text"[(ngModel)]="reg.dob" required></ion-input>\n						</ion-item>\n\n						<ion-item>\n							<ion-label color="primary" floating>Shirt Size</ion-label>\n								<ion-select [(ngModel)]="reg.shirt" popover>\n			       <ion-option value="S">Adult - Small</ion-option>\n			       <ion-option value="M">Adult - Medium</ion-option>\n			       <ion-option value="L">Adult - Large</ion-option>\n			       <ion-option value="XL">Adult - X-Large</ion-option>\n				<ion-option value="16">Child - Size 16</ion-option>\n				<ion-option value="15">Child - Size 15</ion-option>\n				<ion-option value="14">Child - Size 14</ion-option>\n				<ion-option value="13">Child - Size 13</ion-option>\n				<ion-option value="12">Child - Size 12</ion-option>\n				<ion-option value="11">Child - Size 11</ion-option>\n				<ion-option value="10">Child - Size 10</ion-option>\n				<ion-option value="9">Child - Size 9</ion-option>\n				<ion-option value="8">Child - Size 8</ion-option>\n				<ion-option value="7">Child - Size 7</ion-option>\n				<ion-option value="6">Child - Size 6</ion-option>\n				</ion-select>\n						</ion-item>\n					<ion-item>\n                           <ion-label color="primary" floating>Team</ion-label>\n				<ion-select [(ngModel)]="reg.division" popover>\n				<ion-option *ngFor="let t of teams" [value]="t.id">{{t.name}}</ion-option>\n				</ion-select>\n				</ion-item>\n                           <ion-item>\n\n                           <ion-label color="primary" floating>Contact Details (Type)</ion-label>\n				<ion-select [(ngModel)]="reg.contact" popover>\n				<ion-option value="K">Next of Kin</ion-option>\n			       <ion-option value="P">Parent</ion-option>\n				<ion-option value="G">Guardian</ion-option>\n                            <ion-option value="O">Other</ion-option>\n				</ion-select>\n					</ion-item>\n						<ion-item>\n							<ion-label color="primary" floating>Contact Name</ion-label>\n							<ion-input type="text"[(ngModel)]="reg.cname" required></ion-input>\n						</ion-item>\n\n						<ion-item>\n							<ion-label color="primary" floating>Contact Address</ion-label>\n							<ion-input type="text"[(ngModel)]="reg.cadd" required></ion-input>\n						</ion-item>\n						<ion-item>\n							<ion-label color="primary" floating>Contact Phone</ion-label>\n							<ion-input type="text"[(ngModel)]="reg.cphone" required></ion-input>\n						</ion-item>\n						<ion-item>\n							<ion-label color="primary" floating>Medical / Physical Issues</ion-label>\n							<ion-input type="text"[(ngModel)]="reg.medical"></ion-input>\n						</ion-item>\n\n					</ion-list>\n					\n\n				</ion-col>\n			</ion-row>\n </ion-grid>  \n</ion-content>\n<ion-footer>\n<button ion-button full color="secondary" (click)="doRegister()">Continue</button>\n</ion-footer>\n'/*ion-inline-end:"/var/www/html/ionic/soccer/src/pages/new/new.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_connect__["a" /* Connect */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* ToastController */]])
+    ], NewPage);
+    return NewPage;
+}());
+
+//# sourceMappingURL=new.js.map
+
+/***/ }),
+
+/***/ 210:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PaymentPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__enter_credit_card_enter_credit_card__ = __webpack_require__(106);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_connect__ = __webpack_require__(8);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var PaymentPage = /** @class */ (function () {
+    function PaymentPage(navCtrl, navParams, loadingCtrl, connect, alertCtrl) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.loadingCtrl = loadingCtrl;
+        this.connect = connect;
+        this.alertCtrl = alertCtrl;
+        this.payment = '';
+        this.paycard = '';
+        this.allok = false;
+        this.pmode = 1;
+        this.id = 0;
+        this.tick = './assets/img/tick.png';
+        this.blank = './assets/img/blank.png';
+        this.stripe_pub = '';
+        this.teamname = '';
+        this.name = '';
+        this.mymethod = 1;
+        this.pmethods = [];
+        this.options = [];
+        this.allok = false;
+        this.pmode = 1;
+        this.mymethod = 1;
+        this.id = this.navParams.get('id');
+    }
+    PaymentPage.prototype.ionViewDidEnter = function () {
+        this.recalc();
+    };
+    PaymentPage.prototype.chooseOption = function (a) {
+        this.mymethod = a;
+        for (var i = 0; i < this.options.length; i++) {
+            if (this.options[i].id == a)
+                this.options[i].selected = 1;
+            else
+                this.options[i].selected = 0;
+        }
+    };
+    PaymentPage.prototype.recalc = function () {
+        var _this = this;
+        this.payment = window.localStorage.getItem('userPayment');
+        if (!this.payment)
+            this.payment = '';
+        if (this.payment.length)
+            this.allok = true;
+        var that = this;
+        var loader = this.loadingCtrl.create({
+            content: "Loading..."
+        });
+        loader.present();
+        var url = 'zs_getpaymentdetails.php?pmode=' + this.pmode + '&id=' + this.id + '&payment=' + this.payment;
+        console.log(url);
+        this.connect.getList(url).subscribe(function (data) {
+            loader.dismiss();
+            that.paycard = data.paycard;
+            that.pmethods = data.pmethods;
+            that.stripe_pub = data.stripe_pub;
+            that.payment = data.payment;
+            that.teamname = data.teamname;
+            that.name = data.name;
+            that.options = data.options;
+            window.localStorage.setItem('userPayment', that.payment);
+            if (that.payment.length)
+                that.allok = true;
+            else
+                that.allok = false;
+            that.chooseOption(that.mymethod);
+        }, function (err) {
+            loader.dismiss();
+            _this.connect.logError(err);
+        });
+    };
+    PaymentPage.prototype.doComplete = function () {
+        var _this = this;
+        var that = this;
+        var alert = this.alertCtrl.create({
+            title: 'Thank you',
+            subTitle: 'Registration is complete',
+            buttons: [
+                {
+                    text: 'Okay',
+                    role: 'cancel',
+                    handler: function () {
+                        window.localStorage.setItem('goback', 'yes');
+                        _this.navCtrl.pop();
+                    }
+                }
+            ]
+        });
+        alert.present();
+    };
+    PaymentPage.prototype.doError = function () {
+        var that = this;
+        var alert = this.alertCtrl.create({
+            title: 'Warning',
+            subTitle: 'Payment could not be completed - Please try again',
+            buttons: [
+                {
+                    text: 'Okay',
+                    role: 'cancel',
+                    handler: function () {
+                    }
+                }
+            ]
+        });
+        alert.present();
+    };
+    PaymentPage.prototype.showPayment = function (a) {
+        window.localStorage.setItem('userPayment', a);
+        this.pmode = 0;
+        this.recalc();
+    };
+    PaymentPage.prototype.showEnterPayment = function () {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__enter_credit_card_enter_credit_card__["a" /* EnterCreditCardPage */], { stripe_pub: this.stripe_pub });
+    };
+    PaymentPage.prototype.doConfirm = function () {
+        var _this = this;
+        var that = this;
+        var loader = this.loadingCtrl.create({
+            content: "Please wait..."
+        });
+        loader.present();
+        var url = 'zs_savepayment.php?reg=' + this.id + '^' + this.payment + '^' + this.mymethod;
+        //  this.myAlert(url);
+        this.connect.getList(url).subscribe(function (data) {
+            loader.dismiss();
+            if (data.success)
+                that.doComplete();
+            else
+                that.doError();
+        }, function (err) {
+            loader.dismiss();
+            _this.connect.logError(err);
+        });
+    };
+    PaymentPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'page-payment',template:/*ion-inline-start:"/var/www/html/ionic/soccer/src/pages/payment/payment.html"*/'<ion-header no-border no-shadow  style="background-color:white">\n	<ion-navbar align-title="center"  style="background-color:white">\n		<ion-title style="background-color:white"><img src="./assets/img/mainbanner.jpg"></ion-title>\n	</ion-navbar>\n</ion-header>\n\n\n<ion-content no-padding text-center>\n<div style="text-align:center; color:white; background-color:#8EC63F; padding:6px; font-size:1.4em !important; margin-bottom: 0px !important">PAYMENT OPTIONS</div>\n<ion-list>\n<ion-item>\n<p>Player: <span style="color:#488AFF">{{ name }}</span></p>\n</ion-item>\n<ion-item>\n<p>Team: <span style="color:#488AFF">{{ teamname }}</span></p>\n</ion-item>\n<ion-item *ngFor="let o of options">\n<ion-row (click)="chooseOption(o.id)">\n<ion-col col-2 >\n<img [src]="o.selected ? tick : blank" >\n</ion-col>\n\n<ion-col col-10>\n<p>{{ o.desc }}</p>\n<p><b>${{ o.price }}</b></p>\n</ion-col>\n</ion-row>\n</ion-item>\n</ion-list>\n\n  <div *ngIf="payment.length"  style="border-top:1px solid gainsboro; padding-bottom:40px">\n   <div>Payment Method :-</div>\n   <p class="userdetails" [innerHTML]="paycard"> </p>\n   <ion-item text-right no-lines>\n    <button ion-button small outline (click)="showPayment(\'\')">Change</button>\n   </ion-item> \n  </div>\n  <div *ngIf="!payment.length"  style="border-top:1px solid gainsboro"> \n   <div>Choose Payment Method :-</div>\n    <ion-list class="noBottomMargin">\n     <ion-item class="height80 borderBottom" no-lines  *ngFor="let m of pmethods">\n       <div (click)="showPayment(m.id);">\n       <ion-row>\n       <ion-col col-1>\n       </ion-col>\n       <ion-col col-11>\n       <div>\n	{{ m.typ }} ending in **** {{ m.last4 }}\n       </div>\n       </ion-col>\n       </ion-row>\n       </div>\n     </ion-item>\n    </ion-list>\n\n    <button ion-item (click)="showEnterPayment()" class="height80 borderBottom" no-lines>\n		Add Payment Method\n    </button>\n </div> \n\n</ion-content>\n<ion-footer *ngIf="allok">\n<button ion-button full (click)="doConfirm()" color="secondary" style="font-weight:bold!important">CONFIRM</button>\n</ion-footer>'/*ion-inline-end:"/var/www/html/ionic/soccer/src/pages/payment/payment.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_3__providers_connect__["a" /* Connect */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]])
+    ], PaymentPage);
+    return PaymentPage;
+}());
+
+//# sourceMappingURL=payment.js.map
+
+/***/ }),
+
+/***/ 211:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TeamsPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_connect__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_connect__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__teamplayers_teamplayers__ = __webpack_require__(107);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1130,57 +1234,16 @@ var TeamsPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 210:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SponsorPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-var SponsorPage = /** @class */ (function () {
-    function SponsorPage(navCtrl, navParams) {
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this.sponsorimage = '';
-        this.sponsorimage = 'https://theparcelpeople.com.au/soccer/sponsor.jpg?rnd=' + Math.random();
-    }
-    SponsorPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad SponsorPage');
-    };
-    SponsorPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-sponsor',template:/*ion-inline-start:"/var/www/html/ionic/soccer/src/pages/sponsor/sponsor.html"*/'<ion-header no-border no-shadow  style="background-color:white">\n	<ion-navbar align-title="center"  style="background-color:white">\n		<ion-title style="background-color:white"><img src="./assets/img/mainbanner.jpg"></ion-title>\n	</ion-navbar>\n</ion-header>\n\n<ion-content>\n<img [src]="sponsorimage" style="width:100%">\n</ion-content>\n'/*ion-inline-end:"/var/www/html/ionic/soccer/src/pages/sponsor/sponsor.html"*/,
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */]])
-    ], SponsorPage);
-    return SponsorPage;
-}());
-
-//# sourceMappingURL=sponsor.js.map
-
-/***/ }),
-
-/***/ 211:
+/***/ 212:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SocialuploadPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_camera__ = __webpack_require__(52);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_http__ = __webpack_require__(53);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__past_past__ = __webpack_require__(212);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_camera__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_http__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__past_past__ = __webpack_require__(213);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1280,14 +1343,14 @@ var SocialuploadPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 212:
+/***/ 213:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PastPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_connect__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_connect__ = __webpack_require__(8);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1364,14 +1427,14 @@ var PastPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 213:
+/***/ 214:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return InfoPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_connect__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_connect__ = __webpack_require__(8);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1415,14 +1478,14 @@ var InfoPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 214:
+/***/ 215:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MarketPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_connect__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_connect__ = __webpack_require__(8);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1492,16 +1555,16 @@ var MarketPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 215:
+/***/ 216:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyprofilesPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_connect__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__editprofile_editprofile__ = __webpack_require__(104);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__newprof_newprof__ = __webpack_require__(105);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_connect__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__editprofile_editprofile__ = __webpack_require__(217);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__newprof_newprof__ = __webpack_require__(52);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1561,14 +1624,16 @@ var MyprofilesPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 216:
+/***/ 217:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TippingPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EditprofilePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_connect__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_connect__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_camera__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_http__ = __webpack_require__(54);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1581,21 +1646,229 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var TippingPage = /** @class */ (function () {
-    function TippingPage(navCtrl, navParams, connect) {
+
+
+var EditprofilePage = /** @class */ (function () {
+    function EditprofilePage(navCtrl, navParams, connect, camera, http, loadingCtrl) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.connect = connect;
+        this.camera = camera;
+        this.http = http;
+        this.loadingCtrl = loadingCtrl;
+        this.pl = {
+            id: 0,
+            name: 'searching...',
+            dob: '',
+            favplayer: '',
+            position: '',
+            favteam: '',
+            bio: '',
+            awards: '',
+            img: 'https://theparcelpeople.com.au/soccer/general.jpg',
+            picdata: ''
+        };
+    }
+    EditprofilePage.prototype.ionViewDidLoad = function () {
+        var that = this;
+        var url = 'zs_profileinfo.php?id=' + this.navParams.get('id');
+        this.connect.getList(url).subscribe(function (data) {
+            that.pl = data;
+        }, function (err) {
+        });
+    };
+    EditprofilePage.prototype.getpicture = function () {
+        var options = {
+            quality: 70,
+            targetWidth: 500,
+            targetHeight: 500,
+            destinationType: this.camera.DestinationType.DATA_URL,
+            encodingType: this.camera.EncodingType.JPEG,
+            mediaType: this.camera.MediaType.PICTURE
+        };
+        var that = this;
+        this.camera.getPicture(options).then(function (imageData) {
+            that.pl.picdata = imageData;
+            that.pl.img = 'data:image/jpeg;base64,' + imageData;
+        }, function (err) {
+            alert(JSON.stringify(err));
+        });
+    };
+    EditprofilePage.prototype.getcameraroll = function () {
+        var options = {
+            quality: 70,
+            targetWidth: 500,
+            targetHeight: 500,
+            sourceType: 0,
+            destinationType: this.camera.DestinationType.DATA_URL,
+            encodingType: this.camera.EncodingType.JPEG,
+            mediaType: this.camera.MediaType.PICTURE
+        };
+        var that = this;
+        this.camera.getPicture(options).then(function (imageData) {
+            that.pl.picdata = imageData;
+            that.pl.img = 'data:image/jpeg;base64,' + imageData;
+        }, function (err) {
+            alert(JSON.stringify(err));
+        });
+    };
+    EditprofilePage.prototype.doEdit = function () {
+        this.pl.id = this.navParams.get('id');
+        var that = this;
+        var loading = this.loadingCtrl.create({
+            content: 'Please wait...'
+        });
+        loading.present();
+        var url = 'http://pikcup.com.au/test/zs_editprofile.php';
+        this.http.post(url, that.pl, {})
+            .then(function (data) {
+            loading.dismiss();
+            that.navCtrl.pop();
+        })
+            .catch(function (error) {
+            loading.dismiss();
+        });
+    };
+    EditprofilePage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'page-editprofile',template:/*ion-inline-start:"/var/www/html/ionic/soccer/src/pages/editprofile/editprofile.html"*/'<ion-header no-border no-shadow  style="background-color:white">\n	<ion-navbar align-title="center"  style="background-color:white">\n		<ion-title style="background-color:white"><img src="./assets/img/mainbanner.jpg"></ion-title>\n	</ion-navbar>\n</ion-header>\n\n\n<ion-content no-padding text-center>\n<div style="text-align:center; color:white; background-color:#8EC63F; padding:6px; font-size:1.4em !important; margin-bottom: 0px !important">EDIT PROFILE</div>\n\n<ion-grid>\n<ion-row text-center>\n<ion-col col-1>\n</ion-col>\n<ion-col col-10 text-center>\n<ion-item text-center>\n  <img [src]="pl.img"  style="max-width:300px !important; max-height:300px !important; width:100% !; height:100%">\n</ion-item>\n</ion-col>\n<ion-col col-1>\n</ion-col>\n</ion-row> \n<ion-row>\n<ion-col col-6>\n<button ion-button icon-start (click)="getpicture()">\n<ion-icon name="camera"></ion-icon>\nTake Picture\n</button>\n</ion-col>\n<ion-col col-6>\n<button ion-button icon-end (click)="getcameraroll()">\n<ion-icon name="images"></ion-icon>\nCamera Roll\n</button>\n</ion-col>\n</ion-row>\n\n<ion-row text-center>\n<ion-col col-12>\n<h2>\n{{ pl.name }}\n</h2>\n</ion-col>\n</ion-row>\n</ion-grid>\n<ion-list>\n<ion-item>\n<ion-label for="dob" stacked>Date of Birth</ion-label>\n<ion-input [(ngModel)]="pl.dob"  style="color:dodgerblue"></ion-input>\n</ion-item>\n<ion-item>\n<ion-label for="position" stacked>Position Played</ion-label>\n<ion-input [(ngModel)]="pl.position"  style="color:dodgerblue"></ion-input>\n</ion-item>\n<ion-item>\n<ion-label for="favteam"  stacked>Favourite Team</ion-label>\n<ion-input [(ngModel)]="pl.favteam"  style="color:dodgerblue"></ion-input>\n</ion-item>\n<ion-item>\n<ion-label for="favplayer"  stacked>Favourite Player</ion-label>\n<ion-input [(ngModel)]="pl.favplayer"  style="color:dodgerblue"></ion-input>\n</ion-item>\n<ion-item>\n<ion-label stacked>Awards & Honours</ion-label>\n<ion-textarea [(ngModel)]="pl.awards"  style="color:dodgerblue"></ion-textarea>\n</ion-item>\n<ion-item>\n<ion-label stacked>Bio</ion-label>\n<ion-textarea [(ngModel)]="pl.bio"  style="color:dodgerblue"></ion-textarea>\n</ion-item>\n\n</ion-list>\n</ion-content>\n<ion-footer>\n<button ion-button full color="secondary" (click)="doEdit()">Save</button>\n</ion-footer>\n\n'/*ion-inline-end:"/var/www/html/ionic/soccer/src/pages/editprofile/editprofile.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_connect__["a" /* Connect */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_camera__["a" /* Camera */], __WEBPACK_IMPORTED_MODULE_4__ionic_native_http__["a" /* HTTP */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */]])
+    ], EditprofilePage);
+    return EditprofilePage;
+}());
+
+//# sourceMappingURL=editprofile.js.map
+
+/***/ }),
+
+/***/ 218:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TiphomePage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_connect__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__tipping_tipping__ = __webpack_require__(219);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__newprof_newprof__ = __webpack_require__(52);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+var TiphomePage = /** @class */ (function () {
+    function TiphomePage(navCtrl, navParams, connect) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.connect = connect;
+        this.myAc = '';
+        this.blurb = '';
+        this.players = [];
+    }
+    TiphomePage.prototype.ionViewDidEnter = function () {
+        this.myAc = window.localStorage.getItem('myac');
+        if (!this.myAc)
+            this.myAc = '';
+        var that = this;
+        var n = window.localStorage.getItem('newplayer');
+        if (!n)
+            n = '0';
+        window.localStorage.removeItem('newplayer');
+        if (parseInt(n) > 0) {
+            window.localStorage.setItem('tiplayer', n);
+            this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__tipping_tipping__["a" /* TippingPage */]);
+        }
+        else {
+            var url = 'zs_myplayers.php?id=' + this.myAc;
+            this.connect.getList(url).subscribe(function (data) {
+                that.players = data.players;
+                that.blurb = data.blurb;
+            }, function (err) {
+            });
+        }
+    };
+    TiphomePage.prototype.newreg = function () {
+        window.localStorage.removeItem('goback');
+        window.localStorage.removeItem('newplayer');
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_4__newprof_newprof__["a" /* NewprofPage */]);
+    };
+    TiphomePage.prototype.goPlayer = function (a) {
+        window.localStorage.setItem('tiplayer', a);
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__tipping_tipping__["a" /* TippingPage */]);
+    };
+    TiphomePage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'page-tiphome',template:/*ion-inline-start:"/var/www/html/ionic/soccer/src/pages/tiphome/tiphome.html"*/'<ion-header no-border no-shadow  style="background-color:white">\n	<ion-navbar align-title="center"  style="background-color:white">\n		<ion-title style="background-color:white"><img src="./assets/img/mainbanner.jpg"></ion-title>\n	</ion-navbar>\n</ion-header>\n\n\n<ion-content no-padding text-center>\n<div style="text-align:center; color:white; background-color:#8EC63F; padding:6px; font-size:1.4em !important; margin-bottom: 0px !important">TIPPING COMPETITION</div>\n<ion-row>\n<ion-col col-1>\n</ion-col>\n<ion-col col-10>\n<p [innerHTML]="blurb"></p>\n</ion-col>\n<ion-col col-1>\n</ion-col>\n</ion-row>\n<ion-list text-wrap>\n<ion-item *ngFor="let p of players"  class="borderBottomGainsboroAlpha" (click)="goPlayer(p.id)">\n<ion-avatar item-start>\n <img [src]="p.img">\n</ion-avatar>\n<h2>{{ p.name }}</h2>\n</ion-item>\n<ion-item>\n<button ion-button full (click)="newreg()" style="height:60px; min-height:60px">NEW PLAYER</button>\n</ion-item>\n</ion-list>\n</ion-content>\n'/*ion-inline-end:"/var/www/html/ionic/soccer/src/pages/tiphome/tiphome.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_connect__["a" /* Connect */]])
+    ], TiphomePage);
+    return TiphomePage;
+}());
+
+//# sourceMappingURL=tiphome.js.map
+
+/***/ }),
+
+/***/ 219:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TippingPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_connect__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__sponsor_sponsor__ = __webpack_require__(105);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var TippingPage = /** @class */ (function () {
+    function TippingPage(navCtrl, navParams, loadingCtrl, connect, alertCtrl) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.loadingCtrl = loadingCtrl;
+        this.connect = connect;
+        this.alertCtrl = alertCtrl;
         this.round = 0;
+        this.name = '';
+        this.ladder = '';
+        this.standings = '';
+        this.winners = '';
+        this.mode = 0;
+        this.banner = './assets/img/blankbanner.jpg';
         this.fix = [];
         this.round = 0;
     }
     TippingPage.prototype.ionViewDidLoad = function () {
         var that = this;
-        var url = 'zs_tipfixtures.php';
+        var url = 'zs_tipfixtures.php?id=' + window.localStorage.getItem('tiplayer');
         this.connect.getList(url).subscribe(function (data) {
             that.fix = data.fix;
             that.round = data.round;
+            that.name = data.name;
+            that.ladder = data.ladder;
+            that.winners = data.winners;
+            that.standings = data.standings;
+            that.banner = data.banner;
         }, function (err) {
         });
     };
@@ -1611,11 +1884,70 @@ var TippingPage = /** @class */ (function () {
         }
         this.fix[a].pick = b;
     };
+    TippingPage.prototype.gomode = function (a) {
+        this.mode = a;
+    };
+    TippingPage.prototype.dosubmit = function () {
+        var ss = '';
+        for (var i = 0; i < this.fix.length; i++)
+            ss = ss + '^' + this.fix[i].pick;
+        var that = this;
+        var loading = this.loadingCtrl.create({
+            content: 'Please wait...'
+        });
+        loading.present();
+        var url = 'zs_sendtips.php?id=' + window.localStorage.getItem('tiplayer') + '&round=' + that.round + '&tips=' + ss;
+        console.log(url);
+        this.connect.getList(url).subscribe(function (data) {
+            loading.dismiss();
+            if (data.success)
+                that.doOk();
+            else
+                that.doError();
+        }, function (err) {
+            loading.dismiss();
+        });
+    };
+    TippingPage.prototype.doOk = function () {
+        var that = this;
+        var alert = this.alertCtrl.create({
+            title: 'Good Luck!',
+            subTitle: 'Your tips have been entered',
+            buttons: [
+                {
+                    text: 'Okay',
+                    role: 'cancel',
+                    handler: function () {
+                    }
+                }
+            ]
+        });
+        alert.present();
+    };
+    TippingPage.prototype.doError = function () {
+        var that = this;
+        var alert = this.alertCtrl.create({
+            title: 'Warning',
+            subTitle: 'Tips could not be accepted at this time',
+            buttons: [
+                {
+                    text: 'Okay',
+                    role: 'cancel',
+                    handler: function () {
+                    }
+                }
+            ]
+        });
+        alert.present();
+    };
+    TippingPage.prototype.showSponsor = function () {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__sponsor_sponsor__["a" /* SponsorPage */], { id: 2 });
+    };
     TippingPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-tipping',template:/*ion-inline-start:"/var/www/html/ionic/soccer/src/pages/tipping/tipping.html"*/'<ion-header no-border no-shadow  style="background-color:white">\n	<ion-navbar align-title="center"  style="background-color:white">\n		<ion-title style="background-color:white"><img src="./assets/img/mainbanner.jpg"></ion-title>\n	</ion-navbar>\n</ion-header>\n\n\n<ion-content no-padding text-center>\n<div style="text-align:center; color:white; background-color:#8EC63F; padding:6px; font-size:1.4em !important; margin-bottom: 0px !important">TIPPING COMP.</div>\n<p>Round {{ round }}</p>\n		<ion-list text-wrap text-center>\n			<ion-item *ngFor="let f of fix"  class="borderBottomGainsboroAlpha" >\n                       <ion-row text-center>\n                        <ion-col col-5 style="background-color:#E0E0E0" (click)="choose(f.game,1)">\n                          <p><b>{{ f.name1 }}</b></p>\n                        </ion-col>\n			   <ion-col col-2 style="background-color:#D0D0D0" (click)="choose(f.game,3)">\n			   <p><b>Draw</b></p></ion-col>\n                        <ion-col col-5 style="background-color:#E0E0E0" (click)="choose(f.game,2)">\n                          <p><b>{{ f.name2 }}</b></p>\n                        </ion-col>\n			 </ion-row>\n                       <ion-row text-center>\n                        <ion-col col-5 style="background-color:#E0E0E0" (click)="choose(f.game,1)">\n                          <img [src]="f.pic1" width="100">\n                        </ion-col>\n			   <ion-col col-2 style="background-color:#D0D0D0" (click)="choose(f.game,3)">\n			   <p> </p>\n			   </ion-col>\n                        <ion-col col-5 style="background-color:#E0E0E0" (click)="choose(f.game,2)">\n                          <img [src]="f.pic2" width="100">\n                        </ion-col>\n			 </ion-row>\n                      <ion-row text-center>\n			<ion-col col-12>\n 			<p>{{ f.date }}</p>\n			</ion-col>\n			</ion-row>\n			<ion-row text-center>\n			<ion-col col-12>\n 			<p>Selection: <span style="color:purple">{{ f.choice }}</span></p>\n			</ion-col>\n			</ion-row>\n\n                    </ion-item>\n</ion-list>\n\n</ion-content>\n'/*ion-inline-end:"/var/www/html/ionic/soccer/src/pages/tipping/tipping.html"*/,
+            selector: 'page-tipping',template:/*ion-inline-start:"/var/www/html/ionic/soccer/src/pages/tipping/tipping.html"*/'<ion-header no-border no-shadow  style="background-color:white">\n	<ion-navbar align-title="center"  style="background-color:white">\n		<ion-title style="background-color:white"><img src="./assets/img/mainbanner.jpg"></ion-title>\n	</ion-navbar>\n</ion-header>\n\n\n<ion-content no-padding text-center>\n<div style="text-align:center; color:white; background-color:#8EC63F; padding:6px; font-size:1.4em !important; margin-bottom: 0px !important">TIPPING COMPETITION</div>\n<div *ngIf="mode==0">\n<ion-item>\n<ion-row>\n<ion-col col-6>\n<p>Round : <span style="color:#488AFF">{{round}}</span></p>\n</ion-col>\n<ion-col col-5 text-right style="color:#488AFF"><p><u>Past Tips</u></p></ion-col>\n</ion-row>\n</ion-item>\n<ion-item>\n<ion-row>\n<ion-col col-12>\n<p>Player: <span style="color:#488AFF">{{name}}</span></p>\n</ion-col>\n</ion-row>\n</ion-item>\n		<ion-list text-wrap text-center>\n			<ion-item *ngFor="let f of fix"  class="borderBottomGainsboroAlpha" >\n                       <ion-row text-center>\n                        <ion-col col-5 style="background-color:#E0E0E0" (click)="choose(f.game,1)">\n                          <p><b>{{ f.name1 }}</b></p>\n                        </ion-col>\n			   <ion-col col-2 style="background-color:#D0D0D0" (click)="choose(f.game,3)">\n			   <p><b>Draw</b></p></ion-col>\n                        <ion-col col-5 style="background-color:#E0E0E0" (click)="choose(f.game,2)">\n                          <p><b>{{ f.name2 }}</b></p>\n                        </ion-col>\n			 </ion-row>\n                       <ion-row text-center>\n                        <ion-col col-5 style="background-color:#E0E0E0" (click)="choose(f.game,1)">\n                          <img [src]="f.pic1" width="100">\n                        </ion-col>\n			   <ion-col col-2 style="background-color:#D0D0D0" (click)="choose(f.game,3)">\n			   <p> </p>\n			   </ion-col>\n                        <ion-col col-5 style="background-color:#E0E0E0" (click)="choose(f.game,2)">\n                          <img [src]="f.pic2" width="100">\n                        </ion-col>\n			 </ion-row>\n                      <ion-row text-center>\n			<ion-col col-12>\n 			<p>{{ f.date }}</p>\n			</ion-col>\n			</ion-row>\n			<ion-row text-center>\n			<ion-col col-12>\n 			<p>Selection: <span style="color:#488AFF">{{ f.choice }}</span></p>\n			</ion-col>\n			</ion-row>\n\n                    </ion-item>\n<ion-item>\n<ion-row>\n<ion-col col-12>\n<button ion-button full secondary (click)="dosubmit()" style="height:70px; min-height:70px">Submit Tips</button>\n</ion-col>\n</ion-row>\n</ion-item> \n<ion-item style="height:200px; min-height:200px"> &nbsp;\n</ion-item>\n\n</ion-list>\n</div>\n<div *ngIf="mode==1">\n<ion-grid>\n<ion-row style="font-weight:bold">\n<ion-col col-2>\nRank\n</ion-col>\n<ion-col col-6>Team</ion-col>\n<ion-col col-2>Played</ion-col>\n<ion-col col-2>Points</ion-col>\n</ion-row>\n<ion-row *ngFor="let l of ladder">\n<ion-col col-2>\n{{ l.rank }}</ion-col>\n<ion-col col-6>{{ l.team }}</ion-col>\n<ion-col col-2>{{ l.played }} </ion-col>\n<ion-col col-2>{{ l.points }} </ion-col>\n</ion-row>\n</ion-grid>\n</div>\n<div *ngIf="mode==2" [innerHTML]="standings">\n</div>\n<div *ngIf="mode==3" [innerHTML]="winners">\n</div>\n</ion-content>\n<ion-footer>\n<img [src]="banner" style="width:100%" (click)="showSponsor()">\n<ion-grid no-padding>\n<ion-row text-center>\n <ion-col col-3 (click)="gomode(0)">\n <ion-icon name="football"> </ion-icon>\n </ion-col>\n <ion-col col-3 (click)="gomode(1)">\n <ion-icon name="grid"> </ion-icon>\n </ion-col>\n\n <ion-col col-3 (click)="gomode(2)" >\n <ion-icon name="ribbon"> </ion-icon>\n </ion-col>\n\n <ion-col col-3 (click)="gomode(3)" >\n <ion-icon name="trophy"> </ion-icon>\n </ion-col>\n</ion-row>\n<ion-row text-center>\n\n <ion-col col-3 (click)="gomode(0)">\n Tipping\n </ion-col>\n\n <ion-col col-3 (click)="gomode(1)">\n Ladder\n </ion-col>\n\n <ion-col col-3 (click)="gomode(2)" >\n Standings\n </ion-col>\n\n <ion-col col-3 (click)="gomode(3)">\n Winners\n </ion-col>\n</ion-row>\n\n</ion-grid>\n</ion-footer>\n'/*ion-inline-end:"/var/www/html/ionic/soccer/src/pages/tipping/tipping.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_connect__["a" /* Connect */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_2__providers_connect__["a" /* Connect */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]])
     ], TippingPage);
     return TippingPage;
 }());
@@ -1624,15 +1956,14 @@ var TippingPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 217:
+/***/ 220:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PaymentPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HistoryPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__enter_credit_card_enter_credit_card__ = __webpack_require__(106);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_connect__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_connect__ = __webpack_require__(8);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1645,137 +1976,88 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-
-var PaymentPage = /** @class */ (function () {
-    function PaymentPage(navCtrl, navParams, loadingCtrl, connect, alertCtrl) {
+var HistoryPage = /** @class */ (function () {
+    function HistoryPage(navCtrl, connect, alertCtrl) {
         this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this.loadingCtrl = loadingCtrl;
         this.connect = connect;
         this.alertCtrl = alertCtrl;
-        this.payment = '';
-        this.paycard = '';
-        this.allok = false;
-        this.pmode = 1;
-        this.id = 0;
-        this.tick = './assets/img/tick.png';
-        this.blank = './assets/img/blank.png';
-        this.stripe_pub = '';
-        this.teamname = '';
-        this.mymethod = 1;
-        this.pmethods = [];
-        this.options = [];
-        this.allok = false;
-        this.pmode = 1;
-        this.mymethod = 1;
-        this.id = this.navParams.get('id');
+        this.hist = [];
     }
-    PaymentPage.prototype.ionViewDidEnter = function () {
-        this.recalc();
-    };
-    PaymentPage.prototype.chooseOption = function (a) {
-        this.mymethod = a;
-        for (var i = 0; i < this.options.length; i++) {
-            if (this.options[i].id == a)
-                this.options[i].selected = 1;
-            else
-                this.options[i].selected = 0;
-        }
-    };
-    PaymentPage.prototype.recalc = function () {
-        var _this = this;
-        this.payment = window.localStorage.getItem('userPayment');
-        if (!this.payment)
-            this.payment = '';
-        if (this.payment.length)
-            this.allok = true;
+    HistoryPage.prototype.ionViewDidEnter = function () {
+        var m = window.localStorage.getItem('myac');
         var that = this;
-        var loader = this.loadingCtrl.create({
-            content: "Loading..."
-        });
-        loader.present();
-        var url = 'zs_getpaymentdetails.php?pmode=' + this.pmode + '&id=' + this.id + '&payment=' + this.payment;
-        console.log(url);
+        var url = 'zs_history.php?me=' + m;
         this.connect.getList(url).subscribe(function (data) {
-            loader.dismiss();
-            console.log(data);
-            that.paycard = data.paycard;
-            that.pmethods = data.pmethods;
-            that.stripe_pub = data.stripe_pub;
-            that.payment = data.payment;
-            that.teamname = data.teamname;
-            that.options = data.options;
-            window.localStorage.setItem('userPayment', that.payment);
-            if (that.payment.length)
-                that.allok = true;
-            else
-                that.allok = false;
-            that.chooseOption(that.mymethod);
+            that.hist = data.hist;
         }, function (err) {
-            loader.dismiss();
-            _this.connect.logError(err);
         });
     };
-    PaymentPage.prototype.myAlert = function (msg) {
-        var that = this;
-        var alert = this.alertCtrl.create({
-            title: 'Thank you',
-            subTitle: msg,
-            buttons: [
-                {
-                    text: 'Okay',
-                    role: 'cancel',
-                    handler: function () {
-                    }
-                }
-            ]
-        });
-        alert.present();
-    };
-    PaymentPage.prototype.showPayment = function (a) {
-        window.localStorage.setItem('userPayment', a);
-        this.pmode = 0;
-        this.recalc();
-    };
-    PaymentPage.prototype.showEnterPayment = function () {
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__enter_credit_card_enter_credit_card__["a" /* EnterCreditCardPage */], { stripe_pub: this.stripe_pub });
-    };
-    PaymentPage.prototype.doConfirm = function () {
-        var _this = this;
-        var that = this;
-        var loader = this.loadingCtrl.create({
-            content: "Please wait..."
-        });
-        loader.present();
-        var url = 'zs_savepayment.php?reg=' + this.id + '^' + this.payment + '^' + this.mymethod;
-        //  this.myAlert(url);
-        this.connect.getList(url).subscribe(function (data) {
-            loader.dismiss();
-            if (data.success) {
-                window.localStorage.setItem('goback', 'yes');
-                _this.navCtrl.pop();
-            }
-            else
-                _this.myAlert('Your payment could not be completed.  Please try again');
-        }, function (err) {
-            loader.dismiss();
-            _this.connect.logError(err);
-        });
-    };
-    PaymentPage = __decorate([
+    HistoryPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-payment',template:/*ion-inline-start:"/var/www/html/ionic/soccer/src/pages/payment/payment.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>Payment</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n<ion-list>\n<ion-item text-center>\n{{ teamname }}\n</ion-item>\n<ion-item *ngFor="let o of options">\n<ion-row (click)="chooseOption(o.id)">\n<ion-col col-2 >\n<img [src]="o.selected ? tick : blank" >\n</ion-col>\n\n<ion-col col-10>\n<p>{{ o.desc }}</p>\n<p><b>${{ o.price }}</b></p>\n</ion-col>\n</ion-row>\n</ion-item>\n</ion-list>\n\n  <div *ngIf="payment.length"  style="border-top:1px solid gainsboro; padding-bottom:40px">\n   <div>Payment Method :-</div>\n   <p class="userdetails" [innerHTML]="paycard"> </p>\n   <ion-item text-right no-lines>\n    <button ion-button small outline (click)="showPayment(\'\')">Change</button>\n   </ion-item> \n  </div>\n  <div *ngIf="!payment.length"  style="border-top:1px solid gainsboro"> \n   <div>Choose Payment Method :-</div>\n    <ion-list class="noBottomMargin">\n     <ion-item class="height80 borderBottom" no-lines  *ngFor="let m of pmethods">\n       <div (click)="showPayment(m.id);">\n       <ion-row>\n       <ion-col col-1>\n       </ion-col>\n       <ion-col col-11>\n       <div>\n	{{ m.typ }} ending in **** {{ m.last4 }}\n       </div>\n       </ion-col>\n       </ion-row>\n       </div>\n     </ion-item>\n    </ion-list>\n\n    <button ion-item (click)="showEnterPayment()" class="height80 borderBottom" no-lines>\n		Add Payment Method\n    </button>\n </div> \n\n</ion-content>\n<ion-footer *ngIf="allok">\n<button ion-button full (click)="doConfirm()" color="secondary" style="font-weight:bold!important">CONFIRM</button>\n</ion-footer>'/*ion-inline-end:"/var/www/html/ionic/soccer/src/pages/payment/payment.html"*/,
+            selector: 'page-history',template:/*ion-inline-start:"/var/www/html/ionic/soccer/src/pages/history/history.html"*/'<ion-header no-border no-shadow  style="background-color:white">\n	<ion-navbar align-title="center"  style="background-color:white">\n		<ion-title style="background-color:white"><img src="./assets/img/mainbanner.jpg"></ion-title>\n	</ion-navbar>\n</ion-header>\n\n\n<ion-content no-padding text-center>\n<div style="text-align:center; color:white; background-color:#8EC63F; padding:6px; font-size:1.4em !important; margin-bottom: 0px !important">PAYMENT HISTORY</div>\n<div *ngIf="!hist.length">\n<p>No payment history to display</p>\n</div>\n<div *ngIf="hist.length">\n<ion-grid text-wrap>\n<ion-item style="background-color:black; color:white"><ion-row>\n<ion-col col-9>\nDate & Description</ion-col>\n<ion-col col-3 text-right>Amount</ion-col></ion-row></ion-item>\n<ion-item *ngFor="let h of hist; let i = index" [ngClass]="(i % 2 == 0) ? \'odd\' : \'even\'">\n<ion-row>\n<ion-col col-9><p>{{ h.desc }}</p><p><small>{{ h.date }}</small></p></ion-col>\n<ion-col col-3 text-right>{{  h.amount}}</ion-col>\n</ion-row>\n</ion-item>\n</ion-grid>\n</div>\n</ion-content>\n'/*ion-inline-end:"/var/www/html/ionic/soccer/src/pages/history/history.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_3__providers_connect__["a" /* Connect */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]])
-    ], PaymentPage);
-    return PaymentPage;
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__providers_connect__["a" /* Connect */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]])
+    ], HistoryPage);
+    return HistoryPage;
 }());
 
-//# sourceMappingURL=payment.js.map
+//# sourceMappingURL=history.js.map
 
 /***/ }),
 
-/***/ 218:
+/***/ 221:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EventsPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_connect__ = __webpack_require__(8);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var EventsPage = /** @class */ (function () {
+    function EventsPage(navCtrl, navParams, connect) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.connect = connect;
+        this.button = '';
+        this.amount = 0.00;
+        this.eventimage = './assets/img/blank.jpg';
+    }
+    EventsPage.prototype.ionViewDidLoad = function () {
+        var that = this;
+        var url = 'zs_event.php';
+        this.connect.getList(url).subscribe(function (data) {
+            that.eventimage = data.eventimage;
+            that.amount = data.amount;
+            that.button = data.button;
+        }, function (err) {
+        });
+    };
+    EventsPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'page-events',template:/*ion-inline-start:"/var/www/html/ionic/soccer/src/pages/events/events.html"*/'<ion-header no-border no-shadow  style="background-color:white">\n	<ion-navbar align-title="center"  style="background-color:white">\n		<ion-title style="background-color:white"><img src="./assets/img/mainbanner.jpg"></ion-title>\n	</ion-navbar>\n</ion-header>\n\n<ion-content>\n<img [src]="eventimage" style="width:100%">\n<ion-item no-lines>\n<ion-row>\n<ion-col col-6>\n<p style="font-size:2.5em">${{ amount }}</p>\n</ion-col>\n<ion-col col-6>\n<button ion-button full (click)="dosubmit()" style="height:70px; min-height:70px">{{ button }}</button>\n</ion-col>\n</ion-row>\n</ion-item>\n</ion-content>'/*ion-inline-end:"/var/www/html/ionic/soccer/src/pages/events/events.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_connect__["a" /* Connect */]])
+    ], EventsPage);
+    return EventsPage;
+}());
+
+//# sourceMappingURL=events.js.map
+
+/***/ }),
+
+/***/ 222:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1820,52 +2102,7 @@ var BookPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 219:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EventsPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-/**
- * Generated class for the EventsPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-var EventsPage = /** @class */ (function () {
-    function EventsPage(navCtrl, navParams) {
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-    }
-    EventsPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad EventsPage');
-    };
-    EventsPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-events',template:/*ion-inline-start:"/var/www/html/ionic/soccer/src/pages/events/events.html"*/'<!--\n  Generated template for the EventsPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Events</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n</ion-content>\n'/*ion-inline-end:"/var/www/html/ionic/soccer/src/pages/events/events.html"*/,
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */]])
-    ], EventsPage);
-    return EventsPage;
-}());
-
-//# sourceMappingURL=events.js.map
-
-/***/ }),
-
-/***/ 220:
+/***/ 223:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1910,13 +2147,13 @@ var MarketitemPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 221:
+/***/ 224:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(222);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(244);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(225);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(247);
 
 
 Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_1__app_module__["a" /* AppModule */]);
@@ -1924,7 +2161,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 
 /***/ }),
 
-/***/ 244:
+/***/ 247:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1934,41 +2171,45 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(202);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_status_bar__ = __webpack_require__(203);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__(294);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__(297);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_home_home__ = __webpack_require__(204);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_events_events__ = __webpack_require__(219);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_events_events__ = __webpack_require__(221);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_players_players__ = __webpack_require__(205);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_profile_profile__ = __webpack_require__(82);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_payment_payment__ = __webpack_require__(217);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_profile_profile__ = __webpack_require__(83);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_payment_payment__ = __webpack_require__(210);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_login_login__ = __webpack_require__(206);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_register_register__ = __webpack_require__(207);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_membership_membership__ = __webpack_require__(208);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_teams_teams__ = __webpack_require__(209);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_market_market__ = __webpack_require__(214);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__pages_socialupload_socialupload__ = __webpack_require__(211);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__pages_marketitem_marketitem__ = __webpack_require__(220);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__pages_myprofiles_myprofiles__ = __webpack_require__(215);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_teams_teams__ = __webpack_require__(211);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_market_market__ = __webpack_require__(215);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__pages_socialupload_socialupload__ = __webpack_require__(212);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__pages_marketitem_marketitem__ = __webpack_require__(223);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__pages_myprofiles_myprofiles__ = __webpack_require__(216);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pages_enter_credit_card_enter_credit_card__ = __webpack_require__(106);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__pages_new_new__ = __webpack_require__(295);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__pages_newprof_newprof__ = __webpack_require__(105);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__pages_past_past__ = __webpack_require__(212);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__pages_new_new__ = __webpack_require__(209);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__pages_newprof_newprof__ = __webpack_require__(52);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__pages_past_past__ = __webpack_require__(213);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__pages_teamplayers_teamplayers__ = __webpack_require__(107);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__pages_sponsor_sponsor__ = __webpack_require__(210);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__pages_editprofile_editprofile__ = __webpack_require__(104);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__pages_info_info__ = __webpack_require__(213);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__pages_book_book__ = __webpack_require__(218);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__pages_tipping_tipping__ = __webpack_require__(216);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__providers_connect__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__ionic_native_camera__ = __webpack_require__(52);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__ionic_native_stripe__ = __webpack_require__(161);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__ionic_native_http__ = __webpack_require__(53);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__angular_http__ = __webpack_require__(160);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__pages_sponsor_sponsor__ = __webpack_require__(105);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__pages_editprofile_editprofile__ = __webpack_require__(217);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__pages_tiphome_tiphome__ = __webpack_require__(218);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__pages_info_info__ = __webpack_require__(214);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__pages_book_book__ = __webpack_require__(222);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__pages_history_history__ = __webpack_require__(220);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__pages_tipping_tipping__ = __webpack_require__(219);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__providers_connect__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__ionic_native_camera__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__ionic_native_stripe__ = __webpack_require__(161);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_34__ionic_native_http__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_35__angular_http__ = __webpack_require__(160);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
 
 
 
@@ -2017,15 +2258,17 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_15__pages_market_market__["a" /* MarketPage */],
                 __WEBPACK_IMPORTED_MODULE_25__pages_editprofile_editprofile__["a" /* EditprofilePage */],
                 __WEBPACK_IMPORTED_MODULE_12__pages_register_register__["a" /* RegisterPage */],
+                __WEBPACK_IMPORTED_MODULE_29__pages_history_history__["a" /* HistoryPage */],
                 __WEBPACK_IMPORTED_MODULE_18__pages_myprofiles_myprofiles__["a" /* MyprofilesPage */],
+                __WEBPACK_IMPORTED_MODULE_26__pages_tiphome_tiphome__["a" /* TiphomePage */],
                 __WEBPACK_IMPORTED_MODULE_10__pages_payment_payment__["a" /* PaymentPage */],
                 __WEBPACK_IMPORTED_MODULE_13__pages_membership_membership__["a" /* MembershipPage */],
                 __WEBPACK_IMPORTED_MODULE_20__pages_new_new__["a" /* NewPage */],
                 __WEBPACK_IMPORTED_MODULE_21__pages_newprof_newprof__["a" /* NewprofPage */],
-                __WEBPACK_IMPORTED_MODULE_27__pages_book_book__["a" /* BookPage */],
-                __WEBPACK_IMPORTED_MODULE_28__pages_tipping_tipping__["a" /* TippingPage */],
+                __WEBPACK_IMPORTED_MODULE_28__pages_book_book__["a" /* BookPage */],
+                __WEBPACK_IMPORTED_MODULE_30__pages_tipping_tipping__["a" /* TippingPage */],
                 __WEBPACK_IMPORTED_MODULE_22__pages_past_past__["a" /* PastPage */],
-                __WEBPACK_IMPORTED_MODULE_26__pages_info_info__["a" /* InfoPage */],
+                __WEBPACK_IMPORTED_MODULE_27__pages_info_info__["a" /* InfoPage */],
                 __WEBPACK_IMPORTED_MODULE_19__pages_enter_credit_card_enter_credit_card__["a" /* EnterCreditCardPage */],
                 __WEBPACK_IMPORTED_MODULE_14__pages_teams_teams__["a" /* TeamsPage */],
                 __WEBPACK_IMPORTED_MODULE_23__pages_teamplayers_teamplayers__["a" /* TeamplayersPage */],
@@ -2037,12 +2280,11 @@ var AppModule = /** @class */ (function () {
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
-                __WEBPACK_IMPORTED_MODULE_33__angular_http__["b" /* HttpModule */],
+                __WEBPACK_IMPORTED_MODULE_35__angular_http__["b" /* HttpModule */],
                 __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["d" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* MyApp */], {}, {
                     links: [
                         { loadChildren: '../pages/book/book.module#BookPageModule', name: 'BookPage', segment: 'book', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/enter-credit-card/enter-credit-card.module#EnterCreditCardPageModule', name: 'EnterCreditCardPage', segment: 'enter-credit-card', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/events/events.module#EventsPageModule', name: 'EventsPage', segment: 'events', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/marketitem/marketitem.module#MarketitemPageModule', name: 'MarketitemPage', segment: 'marketitem', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/sell/sell.module#SellPageModule', name: 'SellPage', segment: 'sell', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/teamfixtures/teamfixtures.module#TeamfixturesPageModule', name: 'TeamfixturesPage', segment: 'teamfixtures', priority: 'low', defaultHistory: [] },
@@ -2065,6 +2307,7 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_20__pages_new_new__["a" /* NewPage */],
                 __WEBPACK_IMPORTED_MODULE_21__pages_newprof_newprof__["a" /* NewprofPage */],
                 __WEBPACK_IMPORTED_MODULE_22__pages_past_past__["a" /* PastPage */],
+                __WEBPACK_IMPORTED_MODULE_26__pages_tiphome_tiphome__["a" /* TiphomePage */],
                 __WEBPACK_IMPORTED_MODULE_19__pages_enter_credit_card_enter_credit_card__["a" /* EnterCreditCardPage */],
                 __WEBPACK_IMPORTED_MODULE_18__pages_myprofiles_myprofiles__["a" /* MyprofilesPage */],
                 __WEBPACK_IMPORTED_MODULE_10__pages_payment_payment__["a" /* PaymentPage */],
@@ -2072,9 +2315,10 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_24__pages_sponsor_sponsor__["a" /* SponsorPage */],
                 __WEBPACK_IMPORTED_MODULE_14__pages_teams_teams__["a" /* TeamsPage */],
                 __WEBPACK_IMPORTED_MODULE_15__pages_market_market__["a" /* MarketPage */],
-                __WEBPACK_IMPORTED_MODULE_26__pages_info_info__["a" /* InfoPage */],
-                __WEBPACK_IMPORTED_MODULE_27__pages_book_book__["a" /* BookPage */],
-                __WEBPACK_IMPORTED_MODULE_28__pages_tipping_tipping__["a" /* TippingPage */],
+                __WEBPACK_IMPORTED_MODULE_27__pages_info_info__["a" /* InfoPage */],
+                __WEBPACK_IMPORTED_MODULE_29__pages_history_history__["a" /* HistoryPage */],
+                __WEBPACK_IMPORTED_MODULE_28__pages_book_book__["a" /* BookPage */],
+                __WEBPACK_IMPORTED_MODULE_30__pages_tipping_tipping__["a" /* TippingPage */],
                 __WEBPACK_IMPORTED_MODULE_23__pages_teamplayers_teamplayers__["a" /* TeamplayersPage */],
                 __WEBPACK_IMPORTED_MODULE_15__pages_market_market__["a" /* MarketPage */],
                 __WEBPACK_IMPORTED_MODULE_17__pages_marketitem_marketitem__["a" /* MarketitemPage */],
@@ -2083,10 +2327,10 @@ var AppModule = /** @class */ (function () {
             providers: [
                 __WEBPACK_IMPORTED_MODULE_4__ionic_native_status_bar__["a" /* StatusBar */],
                 __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */],
-                __WEBPACK_IMPORTED_MODULE_30__ionic_native_camera__["a" /* Camera */],
-                __WEBPACK_IMPORTED_MODULE_32__ionic_native_http__["a" /* HTTP */],
-                __WEBPACK_IMPORTED_MODULE_31__ionic_native_stripe__["a" /* Stripe */],
-                __WEBPACK_IMPORTED_MODULE_29__providers_connect__["a" /* Connect */],
+                __WEBPACK_IMPORTED_MODULE_32__ionic_native_camera__["a" /* Camera */],
+                __WEBPACK_IMPORTED_MODULE_34__ionic_native_http__["a" /* HTTP */],
+                __WEBPACK_IMPORTED_MODULE_33__ionic_native_stripe__["a" /* Stripe */],
+                __WEBPACK_IMPORTED_MODULE_31__providers_connect__["a" /* Connect */],
                 { provide: __WEBPACK_IMPORTED_MODULE_1__angular_core__["u" /* ErrorHandler */], useClass: __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["c" /* IonicErrorHandler */] }
             ]
         })
@@ -2098,7 +2342,7 @@ var AppModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 294:
+/***/ 297:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2144,15 +2388,16 @@ var MyApp = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 295:
+/***/ 52:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NewPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NewprofPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_connect__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__payment_payment__ = __webpack_require__(217);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_connect__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_camera__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_http__ = __webpack_require__(54);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2166,108 +2411,162 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var NewPage = /** @class */ (function () {
-    function NewPage(navCtrl, navParams, connect, loadingCtrl, toastCtrl) {
+
+var NewprofPage = /** @class */ (function () {
+    function NewprofPage(navCtrl, navParams, connect, camera, http, loadingCtrl) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.connect = connect;
+        this.camera = camera;
+        this.http = http;
         this.loadingCtrl = loadingCtrl;
-        this.toastCtrl = toastCtrl;
-        this.teams = [];
-        this.reg = {
-            id: '',
-            firstname: '',
-            middlename: '',
-            lastname: '',
-            phoneh: '',
-            phonem: '',
-            postcode: '',
-            email: '',
-            address: '',
-            gender: 'M',
+        this.pl = {
+            me: 0,
+            id: 0,
+            first: '',
+            middle: '',
+            last: '',
             dob: '',
-            contact: 'K',
-            cname: '',
-            cadd: '',
-            cphone: '',
-            shirt: '',
-            division: '0',
-            medical: ''
+            favplayer: '',
+            position: '',
+            favteam: '',
+            bio: '',
+            awards: '',
+            img: 'https://theparcelpeople.com.au/soccer/general.jpg',
+            picdata: ''
         };
-        this.teams = [];
+        this.pl.me = window.localStorage.getItem('myac');
     }
-    NewPage.prototype.ionViewDidLoad = function () {
+    NewprofPage.prototype.ionViewDidLoad = function () {
+        this.pl.me = window.localStorage.getItem('myac');
+    };
+    NewprofPage.prototype.getpicture = function () {
+        var options = {
+            quality: 70,
+            targetWidth: 500,
+            targetHeight: 500,
+            destinationType: this.camera.DestinationType.DATA_URL,
+            encodingType: this.camera.EncodingType.JPEG,
+            mediaType: this.camera.MediaType.PICTURE
+        };
         var that = this;
-        var url = 'zs_teamlist.php';
-        this.connect.getList(url).subscribe(function (data) {
-            that.teams = data.teams;
-            console.log(that.teams);
+        this.camera.getPicture(options).then(function (imageData) {
+            that.pl.picdata = imageData;
+            that.pl.img = 'data:image/jpeg;base64,' + imageData;
         }, function (err) {
-            that.connect.logError(err);
+            //    alert(JSON.stringify(err));
         });
     };
-    NewPage.prototype.ionViewDidEnter = function () {
-        if (window.localStorage.getItem('goback') == 'yes')
-            this.navCtrl.pop();
-    };
-    NewPage.prototype.presentToast = function (text) {
-        var toast = this.toastCtrl.create({
-            message: text,
-            duration: 2000,
-            position: 'top'
+    NewprofPage.prototype.getcameraroll = function () {
+        var options = {
+            quality: 70,
+            targetWidth: 500,
+            targetHeight: 500,
+            sourceType: 0,
+            destinationType: this.camera.DestinationType.DATA_URL,
+            encodingType: this.camera.EncodingType.JPEG,
+            mediaType: this.camera.MediaType.PICTURE
+        };
+        var that = this;
+        this.camera.getPicture(options).then(function (imageData) {
+            that.pl.picdata = imageData;
+            that.pl.img = 'data:image/jpeg;base64,' + imageData;
+        }, function (err) {
+            //    alert(JSON.stringify(err));
         });
-        toast.present();
     };
-    NewPage.prototype.doRegister = function () {
-        var msg = '';
-        if (!this.reg.division)
-            msg = "Please choose a team";
-        if ((this.reg.firstname.length < 1) || (this.reg.lastname.length < 1))
-            msg = "Please enter the player's name";
-        if (msg.length)
-            this.presentToast(msg);
-        else {
-            var that_1 = this;
-            var loading_1 = this.loadingCtrl.create({
-                content: 'Please wait...'
-            });
-            loading_1.present();
-            var url = 'zs_playerregister.php?me=' + window.localStorage.getItem('myac') + '&reg=' + JSON.stringify(this.reg);
-            console.log(url);
-            this.connect.getList(url).subscribe(function (data) {
-                loading_1.dismiss();
-                if (data.success) {
-                    window.localStorage.setItem('newplayer', data.id);
-                    that_1.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__payment_payment__["a" /* PaymentPage */], { id: data.id });
-                }
-            }, function (err) {
-                loading_1.dismiss();
-                that_1.presentToast("Could not register player");
-                that_1.connect.logError(err);
-            });
-        }
+    NewprofPage.prototype.doEdit = function () {
+        var that = this;
+        var loading = this.loadingCtrl.create({
+            content: 'Please wait...'
+        });
+        loading.present();
+        var url = 'http://pikcup.com.au/test/zs_newprofile.php';
+        this.http.post(url, that.pl, {})
+            .then(function (data) {
+            loading.dismiss();
+            window.localStorage.setItem('newplayer', data.data);
+            that.navCtrl.pop();
+        })
+            .catch(function (error) {
+            loading.dismiss();
+        });
     };
-    NewPage = __decorate([
+    NewprofPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-new',template:/*ion-inline-start:"/var/www/html/ionic/soccer/src/pages/new/new.html"*/'<ion-header>\n	<ion-navbar align-title="center"  style="background-color:white">\n		<ion-title style="background-color:white">New Registration</ion-title>\n       </ion-navbar>\n</ion-header>\n\n<ion-content>\n <ion-grid>\n <ion-row>\n   <ion-col>\n<p>Please fill out the details below to register.</p>\n </ion-col>\n</ion-row>\n			<ion-row>\n				<ion-col>\n					<ion-list>\n						<ion-item>\n							<ion-label color="primary" floating>Player\'s First Name</ion-label>\n							<ion-input type="text" [(ngModel)]="reg.firstname"></ion-input>\n						</ion-item>\n						<ion-item>\n							<ion-label color="primary" floating>Middle Name</ion-label>\n							<ion-input type="text"[(ngModel)]="reg.middlename"></ion-input>\n						</ion-item>\n						<ion-item>\n							<ion-label color="primary" floating>Surname</ion-label>\n							<ion-input type="text" [(ngModel)]="reg.lastname"></ion-input>\n						</ion-item>\n\n						<ion-item>\n							<ion-label color="primary" floating>Address</ion-label>\n							<ion-input type="text"[(ngModel)]="reg.address" required></ion-input>\n						</ion-item>\n\n						<ion-item>\n							<ion-label color="primary" floating>Postal Code</ion-label>\n							<ion-input type="text"[(ngModel)]="reg.postcode" required></ion-input>\n						</ion-item>\n						<ion-item>\n							<ion-label color="primary" floating>Home Phone</ion-label>\n							<ion-input type="text"[(ngModel)]="reg.phoneh" required></ion-input>\n						</ion-item>\n						<ion-item>\n							<ion-label color="primary" floating>Mobile</ion-label>\n							<ion-input type="text"[(ngModel)]="reg.phonem" required></ion-input>\n						</ion-item>\n						<ion-item>\n							<ion-label color="primary" floating>Email Address</ion-label>\n							<ion-input type="email"[(ngModel)]="reg.email" required></ion-input>\n						</ion-item>\n                                          <ion-item>\n                           <ion-label color="primary" floating>Gender</ion-label>\n				<ion-select [(ngModel)]="reg.gender" popover>\n	<ion-option value="M">Male</ion-option>\n	<ion-option value="F">Female</ion-option>\n       </ion-select>\n                                              </ion-item> \n						<ion-item>\n							<ion-label color="primary" floating>Date of Birth</ion-label>\n							<ion-input type="text"[(ngModel)]="reg.dob" required></ion-input>\n						</ion-item>\n        <ion-item>\n                           <ion-label color="primary" floating>Contact Details (Type)</ion-label>\n				<ion-select [(ngModel)]="reg.contact" popover>\n				<ion-option value="K">Next of Kin</ion-option>\n			       <ion-option value="P">Parent</ion-option>\n				<ion-option value="G">Guardian</ion-option>\n                            <ion-option value="O">Other</ion-option>\n				</ion-select>\n					</ion-item>\n						<ion-item>\n							<ion-label color="primary" floating>Contact Name</ion-label>\n							<ion-input type="text"[(ngModel)]="reg.cname" required></ion-input>\n						</ion-item>\n\n						<ion-item>\n							<ion-label color="primary" floating>Contact Address</ion-label>\n							<ion-input type="text"[(ngModel)]="reg.cadd" required></ion-input>\n						</ion-item>\n						<ion-item>\n							<ion-label color="primary" floating>Contact Phone</ion-label>\n							<ion-input type="text"[(ngModel)]="reg.cphone" required></ion-input>\n						</ion-item>\n						<ion-item>\n							<ion-label color="primary" floating>Medical / Physical Issues</ion-label>\n							<ion-input type="text"[(ngModel)]="reg.medical"></ion-input>\n						</ion-item>\n\n					</ion-list>\n					\n\n				</ion-col>\n			</ion-row>\n </ion-grid>  \n</ion-content>\n<ion-footer>\n<button ion-button full color="secondary" (click)="doRegister()">Continue</button>\n</ion-footer>\n'/*ion-inline-end:"/var/www/html/ionic/soccer/src/pages/new/new.html"*/,
+            selector: 'page-newprof',template:/*ion-inline-start:"/var/www/html/ionic/soccer/src/pages/newprof/newprof.html"*/'<ion-header no-border no-shadow  style="background-color:white">\n	<ion-navbar align-title="center"  style="background-color:white">\n		<ion-title style="background-color:white"><img src="./assets/img/mainbanner.jpg"></ion-title>\n	</ion-navbar>\n</ion-header>\n\n\n<ion-content no-padding text-center>\n<div style="text-align:center; color:white; background-color:#8EC63F; padding:6px; font-size:1.4em !important; margin-bottom: 0px !important">CREATE PROFILE</div>\n\n<ion-grid>\n<ion-row text-center>\n<ion-col col-1>\n</ion-col>\n<ion-col col-10 text-center>\n<ion-item text-center>\n  <img [src]="pl.img"  style="max-width:300px !important; max-height:300px !important; width:100% !; height:100%">\n</ion-item>\n</ion-col>\n<ion-col col-1>\n</ion-col>\n</ion-row> \n<ion-row>\n<ion-col col-6>\n<button ion-button icon-start (click)="getpicture()">\n<ion-icon name="camera"></ion-icon>\nTake Picture\n</button>\n</ion-col>\n<ion-col col-6>\n<button ion-button icon-end (click)="getcameraroll()">\n<ion-icon name="images"></ion-icon>\nCamera Roll\n</button>\n</ion-col>\n</ion-row>\n</ion-grid>\n<ion-list>\n<ion-item>\n<ion-label for="first" stacked>First Name</ion-label>\n<ion-input [(ngModel)]="pl.first"  style="color:dodgerblue"></ion-input>\n</ion-item>\n<ion-item>\n<ion-label for="middle" stacked>Middle Name(s)</ion-label>\n<ion-input [(ngModel)]="pl.middle"  style="color:dodgerblue"></ion-input>\n</ion-item>\n\n<ion-item>\n<ion-label for="last" stacked>Surname</ion-label>\n<ion-input [(ngModel)]="pl.last"  style="color:dodgerblue"></ion-input>\n</ion-item>\n\n<ion-item>\n<ion-label for="dob" stacked>Date of Birth</ion-label>\n<ion-input [(ngModel)]="pl.dob"  style="color:dodgerblue"></ion-input>\n</ion-item>\n<ion-item>\n<ion-label for="position" stacked>Position Played</ion-label>\n<ion-input [(ngModel)]="pl.position"  style="color:dodgerblue"></ion-input>\n</ion-item>\n<ion-item>\n<ion-label for="favteam"  stacked>Favourite Team</ion-label>\n<ion-input [(ngModel)]="pl.favteam"  style="color:dodgerblue"></ion-input>\n</ion-item>\n<ion-item>\n<ion-label for="favplayer"  stacked>Favourite Player</ion-label>\n<ion-input [(ngModel)]="pl.favplayer"  style="color:dodgerblue"></ion-input>\n</ion-item>\n<ion-item>\n<ion-label stacked>Awards & Honours</ion-label>\n<ion-textarea [(ngModel)]="pl.awards"  style="color:dodgerblue"></ion-textarea>\n</ion-item>\n<ion-item>\n<ion-label stacked>Bio</ion-label>\n<ion-textarea [(ngModel)]="pl.bio"  style="color:dodgerblue"></ion-textarea>\n</ion-item>\n\n</ion-list>\n</ion-content>\n<ion-footer>\n<button ion-button full color="secondary" (click)="doEdit()">Save</button>\n</ion-footer>\n\n'/*ion-inline-end:"/var/www/html/ionic/soccer/src/pages/newprof/newprof.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_connect__["a" /* Connect */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* ToastController */]])
-    ], NewPage);
-    return NewPage;
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_connect__["a" /* Connect */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_camera__["a" /* Camera */], __WEBPACK_IMPORTED_MODULE_4__ionic_native_http__["a" /* HTTP */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */]])
+    ], NewprofPage);
+    return NewprofPage;
 }());
 
-//# sourceMappingURL=new.js.map
+//# sourceMappingURL=newprof.js.map
 
 /***/ }),
 
-/***/ 82:
+/***/ 8:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Connect; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_http__ = __webpack_require__(160);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(272);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_core__ = __webpack_require__(0);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var Connect = /** @class */ (function () {
+    function Connect(http) {
+        this.http = http;
+        //   private server_url: string = 'http://theparcelpeople.com.au/catalogue/server/';
+        this.server_url = 'http://pikcup.com.au/test/';
+        this.server2 = 'http://theparcelpeople.com.au/catalogue/server/';
+    }
+    Connect.prototype.PostQuery = function (object, parameter) {
+        return this.http.post(this.server_url + object, parameter).map(function (res) { return res.json(); });
+    };
+    Connect.prototype.getList = function (object) {
+        return this.http.get(this.server_url + object).map(function (res) { return res.json(); });
+    };
+    Connect.prototype.getList2 = function (object) {
+        return this.http.get(this.server2 + object).map(function (res) { return res.json(); });
+    };
+    Connect.prototype.logError = function (err) {
+        console.error('Error: ' + err);
+    };
+    Connect.prototype.getServerUrl = function () {
+        return this.server_url;
+    };
+    Connect = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_2__angular_core__["A" /* Injectable */])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0__angular_http__["a" /* Http */]])
+    ], Connect);
+    return Connect;
+}());
+
+//# sourceMappingURL=connect.js.map
+
+/***/ }),
+
+/***/ 83:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProfilePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_connect__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_connect__ = __webpack_require__(8);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2321,5 +2620,5 @@ var ProfilePage = /** @class */ (function () {
 
 /***/ })
 
-},[221]);
+},[224]);
 //# sourceMappingURL=main.js.map
